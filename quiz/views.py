@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from compte.models import Revision
 from .models import FlashCarte, CardReview
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
@@ -15,30 +14,17 @@ def updateDue(request, revision_instance, cartereview_id):
         form = UpdateDue(request.POST)
         if form.is_valid():
             card_revue = CardReview.objects.get(id=cartereview_id)
-            revision = Revision.objects.get(id=revision_instance)
+            #revision = Revision.objects.get(id=revision_instance)
 
             difficulty = form.cleaned_data['difficulty']
             card_revue.update_review_date()
-            if card_revue.apprise == True: 
-                revision.cartes.remove(card_revue)
-                revision.save()
+            #if card_revue.apprise == True: 
+            #    revision.cartes.remove(card_revue)
+            #    revision.save()
 
-            return redirect('reviser_cartes', revision.id)
+            return redirect('dashboard')
 
 def reviser_carte(request, cartereview_id):
-    revision_instance = Revision.objects.create(user=user)
-    for carte in carte_non_apprises:
-        revision_instance.cartes.add(carte)
-    revision_instance.save()
-
-    session_instance = Session.objects.create(user=user)
-    revision = Revision.objects.get(id = revision_instance)
-    card_review = CardReview.objects.get(id=cartereview_id)
-    carte_etudiee = FlashCarte.objects.get(id=card_review.carte.id)
-    form = UpdateDue(request.POST)
-    carte_etudiee_dict = carte_etudiee.__dict__
-    carte_etudiee_dict.pop('_state', None)
-    carte_etudiee_dict.pop('date_ajout', None)
     context = { 
         'form':form,
         'carte':carte_etudiee_dict,

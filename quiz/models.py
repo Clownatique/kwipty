@@ -4,7 +4,6 @@ from django.db import models
 from django.utils import timezone
 from datetime import timedelta
 from django.core import serializers
-import uuid
 
 class FlashCarte(models.Model):
     possible_tags = [
@@ -65,7 +64,6 @@ class CardReview(models.Model):
         return f"CardReview {self.id}"
 
     def update_review_date(self):
-        # Mettez à jour la date de révision en fonction de la difficulté
         days_to_add = 0
         if self.apprise == False:
             if self.difficulty == 1:#FACILE

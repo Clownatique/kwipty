@@ -4,7 +4,7 @@ from quiz.models import FlashCarte, CardReview
 from django.core import serializers
 import uuid
 
-class Eleve(AbstractUser):
+class Eleves(AbstractUser):
     nom = models.CharField(max_length=50)
     prenom = models.CharField(max_length=50)
     email = models.EmailField(max_length=254)
