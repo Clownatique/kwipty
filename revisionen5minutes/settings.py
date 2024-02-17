@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'quiz.apps.QuizConfig',
     'compte.apps.CompteConfig',
-    'colorfield',
+    'connaissance.apps.ConnaissanceConfig',
+    'colorfield'
 ]
 
 AUTH_USER_MODEL = "compte.Eleves" 

@@ -29,7 +29,7 @@
         <p> Réglage </p>
     </div>
 </menu>
-<<div class="contenu">
+<div class="contenu">
     <div class="info cours">
         <div class="intitule">
             <h1> Tableau de bord </h1>
@@ -46,6 +46,7 @@
             <a><img src="../media/icones/icone_carte.png.png" sizes="3"></a>
             <progress max="{{cartes|length}}" value="{{nombre_cartes_apprises}}"></progress>
         </div>
+        <a href="{% url 'voir-cartes' %}">voir les cartes</a>
         <div class="info_revision">
             <li class="liste_cours">
                 {% for tag, count in tag_counts.items %}

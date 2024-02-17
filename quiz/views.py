@@ -24,6 +24,13 @@ def updateDue(request, revision_instance, cartereview_id):
 
             return redirect('dashboard')
 
+def voir_cartes(request):
+    cartes = FlashCarte.objects.all()
+    context = {
+        'cartes':cartes
+    }
+    return render(request, 'quiz/blank.html', context)
+
 def reviser_carte(request, cartereview_id):
     context = { 
         'form':form,
