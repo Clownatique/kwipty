@@ -1,0 +1,33 @@
+{% extends 'focus.html' %}
+{% block title %}FLASHCARTES{% endblock title %}
+{% load static %}
+{% block css %}{% static 'quiz/card.css' %}{% endblock css %}
+{% block script %}src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"{% endblock script %}
+{% block scriptperso %}src = "{% static 'quiz/card.js' %}" defer{% endblock scriptperso %} 
+
+{% block content %}
+
+<div class="metaQuestion">
+    <div class="carte" id="carte" onclick="montrerReponse(index)">
+      <div class="front">
+      </div>
+      <div class="back">
+      </div>
+    </div>
+</div>
+<ul id="autotest" style="display:none;">
+  <li style="background-color: greenyellow;" class="difficultyButton" onclick="prepareNextQuestion(1)">C'est venu d'un coup!!</li>
+  <li style="background-color: rgb(205, 202, 50);" class="difficultyButton" onclick="prepareNextQuestion(2)">C'est pas mal..</li>
+  <li style="background-color: orange;" class="difficultyButton" onclick="prepareNextQuestion(3)">C'est pas encore ça!</li>
+  <li style="background-color: red;" class="difficultyButton" onclick="prepareNextQuestion(4)">A Revoir.</li>
+</ul>
+<form method="post" action="{% url 'update_carte_review' revision carte.id %}" id="form">
+  {% csrf_token %}
+  {{ form.as_div }}
+  <button type="submit">Submit</button>
+</form>
+
+<script>
+  const carte = {{ carte|safe }};
+</script>
+{% endblock content %}

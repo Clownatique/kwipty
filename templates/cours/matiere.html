@@ -1,0 +1,82 @@
+{% extends 'index.html' %}
+{% block title %}{{ matiere.nom }}{% endblock %}
+{% load static %}
+{% block css %}{% static 'compte/dashboard.css' %}{% endblock css %}
+{% block content %}
+<menu>
+    <div id="{{ categorie.0.categorie_enseignement }}_bloc" href="{% url 'dashboard' %}" class="liste-matiere">
+        <a href="{% url 'dashboard' %}"><b class="intitule">{{ matiere }}</b></a>
+    </div>
+    {% if liste_cours|length == 0 %}
+        pas de cours disponibles
+    {% else %}
+    {% for cours in liste_cours %}
+    <li class="bloc_cours">
+    <a href="{% url 'affichercoursdetail' matiere.id matiere.nom|slugify cours.titre %}"><b class="intitule">{{ cours.titre }}</b></a>
+    </li>
+    {% endfor %}
+    {% endif %}
+    </div>
+    <div class="options-fixes additional-options">
+        <img src="info.png">
+        <div>
+            <p> Bonjour, {{request.user.prenom}}</p>
+            <p href="{% url 'logout' %}"> Se déconnecter </p>
+        </div>
+        <p> Réglage </p>
+    </div>
+</menu>
+<div class="contenu">
+    <div class="info cours">
+        <div class="intitule">
+            <h1> {{ matiere }}  </h1>
+            {% if liste_cours|length == 0 %}
+                <p> Pas encore de cours disponibles </p>
+            {% else %}
+                <p> Réparti sur {{liste_cours|length}} cours</p>
+            {% endif %}
+        </div>
+        <div class="stats">
+        </div>
+    </div>
+    <div class="info cartes">
+        <div class="progression">
+            <a><img src="../media/icones/icone_carte.png.png" sizes="3"></a>
+            <progress max="{{cartes|length}}" value="{{nombre_cartes_apprises|default_if_none:1}}"></progress>
+        </div>
+        <div class="info_revision">
+            <p>{{cartes|length}} cartes disponibles</p>
+            <li class="liste_cours">
+                {% for tag, count in tag_counts.items %}
+                <a>
+                    {% if count == 1 %}
+                        {{ count }} {{ tag }}
+                    {% else %}
+                        {{ count }} {{ tag }}{{ count|pluralize}}
+                    {% endif %}
+                </a>
+                {% endfor %}
+            </li>
+        </div>
+        <a class="reviser">
+            <button>
+                Réviser les cartes!!
+            </button>
+        </a>
+    </div>
+    <div class="info">
+        <li class="exercices">
+            {% if exercices|length is 0 %}
+            Pas d'exercice disponibles !
+            {% else %}
+            {% for exercice in exercices %}
+            <li class="exo">
+                <p>{{ exercice.titre|default:"Default Title" }}</p>
+                <img src="{{exercice.illustration.path|default_if_none:'../static/cours/default.png'}}">
+            </li>
+            {% endfor %}
+            {% endif %}
+        </li>
+    </div>
+</div>
+{% endblock %}

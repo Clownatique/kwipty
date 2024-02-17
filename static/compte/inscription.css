@@ -1,0 +1,62 @@
+@font-face {
+  font-family: Nunito;
+  src: url(Nunito-VariableFont_wght.ttf);
+}
+body{
+    background-color: #58a2e2;
+    display: flex;
+    height: 200vh;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+    font-family: Nunito;
+}
+
+.main{
+    display: flex;
+    padding: 12px;
+    border-style: solid;
+    border-radius: 5%;
+    border-color: red;
+    background-color: #bbb;
+    box-shadow: 10px 10px 2px black;
+    overflow-y: scroll;
+}
+
+.fieldWrapper{
+    margin: 2ch;
+}
+
+.error {
+    color: #e74c3c;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  input {
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  button {
+    padding: 10px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #2980b9;
+  }

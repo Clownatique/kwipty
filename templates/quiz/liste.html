@@ -1,0 +1,11 @@
+{% extends 'index.html' %}
+{% block title %}LISTE - FLASHCARTES{% endblock title %}
+{% load static %}
+{% block css %}{% static 'quiz/liste.css' %}{% endblock css %}
+
+{% block content %}
+    {{liste_matieres}}
+    {% for matiere in liste_matieres %}
+        matiere
+    {% endfor %}
+{% endblock content %}

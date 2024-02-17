@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% extends 'focus.html' %}
+{% block title %}Exercice de maths{% endblock title %}
+{% block script %} async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"{% endblock script %}
+{% load static %}
+{% block scriptperso%} href = "{% static 'exercices/exo_math.js' %}"{% endblock %}
+{% block css %}{% static '/exercices/exo_math.css' %}{% endblock css %}
+
+{% block content %}
+    <div class="parentExoDiv">
+        <div class="consigne">
+            Résoudre dans C les équations suivantes :
+        </div>
+        <div class="exemple">
+            $${{coefficient.0}}z^2 + {{coefficient.1}}z − {{coefficient.2}} = 0$$ 
+        </div>
+        <div class="resolution">
+
+        </div>
+        <div class="reponse">
+            <input type="text">
+        </div>
+        <div class="reponseOrdi" id="correction">
+            On calcule le discriminant.<br>
+            $$
+            \begin{align}
+            \Delta &= b^2-4ac\\
+            &= {{coefficient.1}}^2 - 4 \times {{coefficient.0}} \times {{coefficient.2}}\\
+            &= {{discriminant}}\\
+            \end{align}
+            $$
+            <br>
+            $$\Delta $$ est {% if discriminant < 0  %} \Delta < 0 <br>
+            Donc les racines sont :
+            $$x_1 = \dfrac{- {{coefficient.1}} + \sqrt{\Delta}}{2 \times {{coefficient.0}}}$$ {% endif %} <br>
+            Donc les racines sont définies par :
+        </div>
+        <div class="switch" onclick="montrerCorrection()">
+            <button>switch</button>
+        </div>
+    </div>
+    <script>function montrerCorrection(){
+        correction = document.getElementById('correction');
+        correction.style.display ='block';
+    }</script>
+{% endblock content %}

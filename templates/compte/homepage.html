@@ -1,0 +1,10 @@
+{% extends "index.html" %}
+{% block content %}
+Bienvenue sur en5minutes!!
+{% if utilisateur.is_authenticated %}
+Bonjour {{utilisateur.prenom}} ! 
+<a href={% url 'dashboard' %}>Travail</a>
+{% else %}
+<a href={% url 'connexion' %}>Se connecter</a>
+{% endif %}
+{% endblock content %}

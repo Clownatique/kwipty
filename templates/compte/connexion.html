@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block css %}{% static 'compte/connexion.css' %}{% endblock css %}
+{% block content %}
+  <div class="login-container">
+      <h2>Login</h2>
+      <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Réviser !</button>
+      </form>
+    
+
+      <form method="post">
+        {% csrf_token %}
+        {{ form.email.label_tag }} {{ form.email }}
+        <a type="submit">J'ai une mémoire pas terrible..</a>
+      </form>
+  </div>
+
+
+  <div class="newAccount">
+    <a href='{% url 'inscription' %}'>
+      Besoin de créer un compte?
+    </a>
+  </div>
+
+{% endblock %}

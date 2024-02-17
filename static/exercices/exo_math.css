@@ -1,0 +1,57 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Ensure the body takes up the full height of the viewport */
+    margin: 0; /* Remove default margin */
+    font-family: Nunito;
+}
+
+.parentExoDiv{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-style: solid;
+    width: 45%;
+    height: 60%;
+}
+
+.consigne{
+    border-style: solid;
+    display: flex;
+    justify-content: center;
+    margin: 2% 10% 2%;
+    font-size: larger;
+}
+
+.exemple{
+    font-size: large;
+}
+
+.resolution{
+    border-color: aliceblue;
+    border-radius: 2px;
+}
+
+.reponse{
+    display: block;
+}
+
+.reponseOrdi{
+    display: none;
+}
+
+input{
+    margin-top: 35%;
+}
+
+.switch{
+    align-self: flex-start;
+}
+
+button{
+    display: flex;
+    align-self: flex-end;
+    margin-top: 50%;
+    margin-bottom: 20%;
+}

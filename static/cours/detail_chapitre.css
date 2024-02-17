@@ -1,0 +1,12 @@
+.info{
+  display: flex;
+}
+
+.icone_cours{
+  max-block-size: 150px;
+}
+
+.icone_cours :hover{
+  cursor: pointer;
+  background-color: #fff;
+}

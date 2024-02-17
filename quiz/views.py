@@ -1,0 +1,92 @@
+from django.shortcuts import render, redirect
+from compte.models import Revision
+from .models import FlashCarte, CardReview
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
+from django.template import loader
+from .forms import FlashCarteForm, UpdateDue
+import json
+from django.core.serializers.json import DjangoJSONEncoder
+from django.urls import reverse
+from .forms import UpdateDue
+
+def updateDue(request, revision_instance, cartereview_id):
+    if request.method == "POST":
+        form = UpdateDue(request.POST)
+        if form.is_valid():
+            card_revue = CardReview.objects.get(id=cartereview_id)
+            revision = Revision.objects.get(id=revision_instance)
+
+            difficulty = form.cleaned_data['difficulty']
+            card_revue.update_review_date()
+            if card_revue.apprise == True: 
+                revision.cartes.remove(card_revue)
+                revision.save()
+
+            return redirect('reviser_cartes', revision.id)
+
+def reviser_carte(request, cartereview_id):
+    revision_instance = Revision.objects.create(user=user)
+    for carte in carte_non_apprises:
+        revision_instance.cartes.add(carte)
+    revision_instance.save()
+
+    session_instance = Session.objects.create(user=user)
+    revision = Revision.objects.get(id = revision_instance)
+    card_review = CardReview.objects.get(id=cartereview_id)
+    carte_etudiee = FlashCarte.objects.get(id=card_review.carte.id)
+    form = UpdateDue(request.POST)
+    carte_etudiee_dict = carte_etudiee.__dict__
+    carte_etudiee_dict.pop('_state', None)
+    carte_etudiee_dict.pop('date_ajout', None)
+    context = { 
+        'form':form,
+        'carte':carte_etudiee_dict,
+        'revision':revision.id
+    }
+    return render(request, 'quiz/carte.html', context)
+
+def reviser_certaines_cartes(request, revision_instance):#revision_instance c'est la liste des id des cartes reviews
+    revision_instance = Revision.objects.get(pk=revision_instance)
+    cartes_id = revision_instance.cartes.values_list('id', flat=True)
+    liste_cartes_id = list(cartes_id)
+    if revision_instance.cartes.count() == 0:
+        return redirect('home')
+    carte_index = cartes_id[0]
+    return redirect('reviser_carte', revision_instance.id, carte_index)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#    revision= Revision.objects.get(id=revision_instance)
+#    cartes_revues = revision.cartes.all()
+#    liste = []
+#    
+#    flashcarte_instances = cartes_revues.values_list('carte', flat=True)
+#    
+#    # If you need the actual Flashcarte instances, you can use the 'in' filter
+#    flashcarte_queryset = FlashCarte.objects.filter(pk__in=flashcarte_instances)
+#
+#    serialized_data = list(flashcarte_queryset.values())
+#    json_data = json.dumps(serialized_data, cls=DjangoJSONEncoder)
+#
+#    context = {
+#        'cartes':json_data,
+#    }
+#    
+#    return render(request, 'quiz/carte.html', context)
+#

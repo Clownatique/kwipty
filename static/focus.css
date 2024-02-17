@@ -1,0 +1,15 @@
+@font-face {
+  font-family: Nunito;
+  src: url(Nunito-VariableFont_wght.ttf);
+}
+.vignette {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    box-shadow: 0 0 50px rgba(0,0,0,0.5) inset;
+  }
+
+body{
+  font-family: Nunito;
+}
