@@ -1,11 +1,10 @@
-[] Remise en marche de la base de la webapp
+[-] Remise en marche de la base de la webapp
 [] Listage des pages web à faire
--> [] Préparer d'abord les modèles
+-> [-] Préparer d'abord les modèles
 -> [] Préparer des données déjà initialisé
 ==S'éloigner du côté trop scolaire de l'application dans sa v0==
 
-[] Création du modèle de cours -> Deck
-[] Affinage de
+[-] Création du modèle de cours -> Deck
 
 # Liste pages web:
 
@@ -17,5 +16,5 @@
 ## App "cours"
 
  - Structure arborescente graphique (s'inspirer d'obsidian pour l'ui)
- - Créer une view pour afficher UN cours
- - 
+ - Créer une view pour afficher UN cours _FAIT_
+ 

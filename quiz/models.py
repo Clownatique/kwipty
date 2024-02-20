@@ -3,13 +3,16 @@ from django.core.files.images import ImageFile
 from django.db import models
 from django.utils import timezone
 from datetime import timedelta
-from django.core import serializers
 
 class FlashCarte(models.Model):
     '''
     Une flashcarte est le modèle avec toutes les données d'une carte en elle même
     Étant donné que cette carte peut être crée par un utilisateur
     -> Une flashcarte ne change pas en fonction de son utilisateur
+
+    TODO : 
+    RAJOUT CHAMP selon utilisateur(comme exemple utilisation..)
+    
     '''
     possible_tags = [
         ('Date', 'Date'),
@@ -21,7 +24,7 @@ class FlashCarte(models.Model):
         ('Citation', 'Citation'),
         ('Généralité','Généralité')
     ]
-    tag = models.CharField(max_length=20, choices=possible_tags)
+    type_de_note = models.CharField(max_length=20, choices=possible_tags)
     date_ajout = models.DateField(auto_now_add=True, null=True)
     devant = models.CharField(max_length=100, blank=True, null=True)
     image_devant = models.ImageField(upload_to='media/image_devant/', blank=True, null=True)
@@ -51,16 +54,21 @@ class FlashCarte(models.Model):
         return f'''{self.devant}[10:] - {self.dos}[10:]'''
     
     
-class StudyNotes(models.Model):
+class DonnesRevision(models.Model):
     '''
-    Une Info de revue de carte possède une foreign key à une carte et un utilisateur.
-    Elle contient toutes les infos concernant une flashcarte et son utilisateur (date de revue, date d'ajout dans le deck...)
+    Les donnés de révision est lié à une carte pour un utilisateur.
+    Elle précise tout ce que le backend a besoin concernant l'apprentissage de cette carte 
+    (date de revue)
+
+    TODO:
+    Lire https://en.wikipedia.org/wiki/Leitner_system
+    (ça équivaut à tout entièrement refaire mdr)
     '''
-    DIFFICULTY_CHOICES = [
-        (1, 'Facile'),
-        (2, 'Moyen'),
+    facilite_reconnaissance = [
+        (1, 'Facile'),  #La carte a été facilement assimilé
+        (2, 'Moyen'),   # '' moyennement assimilé
         (3, 'Difficile'),
-        (4, 'A Refaire immédiatement')
+        (4, 'A Refaire immédiatement') # L'utilisateur souhaite explicitement revoir cette carte
     ]
     carte = models.ForeignKey(FlashCarte, on_delete=models.CASCADE)
     difficulty = models.IntegerField(choices=DIFFICULTY_CHOICES, default=2)
@@ -72,7 +80,7 @@ class StudyNotes(models.Model):
     def __str__(self):
         return f"CardReview {self.id}"
 
-    def mise_à_jour_de_la_prochaine_revue(self):
+    def maj_prochaine_revue(self):
         days_to_add = 0
         if self.apprise == False:
             if self.difficulty == 1:#FACILE

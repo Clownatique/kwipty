@@ -9,7 +9,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 from django.urls import reverse
 from .forms import UpdateDue
 
-def updateDue(request, revision_instance, cartereview_id):
+def maj_donnes_revision(request, revision_instance, cartereview_id):
     if request.method == "POST":
         form = UpdateDue(request.POST)
         if form.is_valid():
@@ -31,7 +31,7 @@ def voir_cartes(request):
     }
     return render(request, 'quiz/blank.html', context)
 
-def reviser_carte(request, cartereview_id):
+def reviser_carte(request, cart):
     context = { 
         'form':form,
         'carte':carte_etudiee_dict,

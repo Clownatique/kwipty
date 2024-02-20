@@ -8,11 +8,11 @@ class FlashCarteForm(forms.ModelForm):
         model = FlashCarte
         fields = ['tag','devant','image_devant','dos','image_dos']
 
-class UpdateDue(forms.ModelForm):
+class MajProchaineRevue(forms.ModelForm):
     class Meta:
         model = CardReview
-        fields = ['difficulty']
+        fields = ['difficulte']
 
     def __init__(self, *args, **kwargs):
         super(UpdateDue, self).__init__(*args, **kwargs)
-        self.fields['difficulty'].widget = forms.RadioSelect(choices=CardReview.DIFFICULTY_CHOICES)
+        self.fields['difficulte'].widget = forms.RadioSelect(choices=DonnesRevision.facilite_reconnaissance)

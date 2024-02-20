@@ -4,7 +4,13 @@ from quiz.models import FlashCarte, CardReview
 from django.core import serializers
 import uuid
 
-class Eleves(AbstractUser):
+class Eleve(AbstractUser):
+    '''
+    Un eleve = un utilisateur.
+    TODO:
+    Peut être rajouté des infos par rapport au niveau d'étude
+    Réfléchir à un système de score
+    '''
     nom = models.CharField(max_length=50)
     prenom = models.CharField(max_length=50)
     email = models.EmailField(max_length=254)

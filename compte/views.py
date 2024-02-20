@@ -10,7 +10,11 @@ from django.contrib.auth.views import LoginView
 from django.views.generic import View
 from django.shortcuts import redirect
 
-def home(request):
+def page_accueil(request):
+    '''
+    Une page d'accueil, pour les nouveaux utilisateur (ou non connecté)
+    
+    '''
     context ={
         'utilisateur':request.user
     }
@@ -25,7 +29,15 @@ class SignUpView(generic.CreateView):
     success_url = reverse_lazy("login")
     template_name = "compte/inscription.html"
 
-def travail(request):
+def menu_principal(request):
+    '''
+    VIEW 'DASHBOARD' : 
+    renvoie la page d'accueil de l'utilisateur connecté qui s'apprête à réviser
+
+    Tout est prêt pour lui:
+    quelques données pour lui rappeller ce qu'il va avoir réviser
+    (nombre de cartes, temps de révision estimé selon son temps passé sur une carte)
+    '''
     if request.user.is_authenticated:
         liste_matieres_par_categorie = []
 
