@@ -6,6 +6,11 @@ from datetime import timedelta
 from django.core import serializers
 
 class FlashCarte(models.Model):
+    '''
+    Une flashcarte est le modèle avec toutes les données d'une carte en elle même
+    Étant donné que cette carte peut être crée par un utilisateur
+    -> Une flashcarte ne change pas en fonction de son utilisateur
+    '''
     possible_tags = [
         ('Date', 'Date'),
         ('Personnage/Figure', 'Personnage/Figure'),
@@ -46,7 +51,11 @@ class FlashCarte(models.Model):
         return f'''{self.devant}[10:] - {self.dos}[10:]'''
     
     
-class CardReview(models.Model):
+class StudyNotes(models.Model):
+    '''
+    Une Info de revue de carte possède une foreign key à une carte et un utilisateur.
+    Elle contient toutes les infos concernant une flashcarte et son utilisateur (date de revue, date d'ajout dans le deck...)
+    '''
     DIFFICULTY_CHOICES = [
         (1, 'Facile'),
         (2, 'Moyen'),
@@ -63,43 +72,43 @@ class CardReview(models.Model):
     def __str__(self):
         return f"CardReview {self.id}"
 
-    def update_review_date(self):
+    def mise_à_jour_de_la_prochaine_revue(self):
         days_to_add = 0
         if self.apprise == False:
             if self.difficulty == 1:#FACILE
-                self.review_date += timedelta(days=1)
+                self.date_de_revue += timedelta(days=1)
                 self.apprise = True
                 self.save()
             elif self.difficulty == 2:#MOYEN
                 if self.demiapprise:
-                    self.review_date += timedelta(hours=12)
+                    self.date_de_revue += timedelta(hours=12)
                     self.apprise = True
                     self.save()
                 else:
-                    self.review_date += timedelta(hours=3)
+                    self.date_de_revue += timedelta(hours=3)
                     self.demiapprise = True
                     self.save()
             elif self.difficulty == 3:#DIFFICILE
-                self.review_date += timedelta(minutes=2)
+                self.date_de_revue += timedelta(minutes=2)
                 self.save()
             elif self.difficulty == 4:#A REFAIRE
-                self.review_date += timedelta(seconds=150)
+                self.date_de_revue += timedelta(seconds=150)
                 self.save()
         else:
             if self.difficulty == 1:#FACILE
-                self.review_date *= timedelta(self.review_date*2.5)
+                self.date_de_revue *= timedelta(self.date_de_revue*2.5)
                 self.save()
             elif self.difficulty == 2:#MOYEN
-                self.review_date *= timedelta(self.review_date*2.5)
+                self.date_de_revue *= timedelta(self.date_de_revue*2.5)
                 self.save()
             elif self.difficulty == 3:#DIFFICILE
                 self.apprise = False
-                self.review_date = timedelta()
+                self.date_de_revue = timedelta()
                 self.ease -= 0.1
                 self.save()
             elif self.difficulty == 4:#A REFAIRE
                 self.apprise= False
-                self.review_date += timedelta(minutes=1)
+                self.date_de_revue += timedelta(minutes=1)
                 self.save()
 
     def save(self, *args, **kwargs):
