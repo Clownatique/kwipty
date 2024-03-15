@@ -1,0 +1,18 @@
+h1
+{
+    color: rgb(124, 56, 11);
+    margin-top: 100px;
+    margin-bottom: 100px;
+    margin-right: 150px;
+    margin-left: 80px;
+    border-style: solid;
+    background-color:rgba(33, 173, 162, 0.11);
+}
+h2
+{
+    margin-top: 100px;
+    margin-bottom: 100px;
+    margin-right: 150px;
+    margin-left: 80px;
+    border-style: solid;
+}
