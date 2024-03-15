@@ -40,8 +40,7 @@ def reviser_carte(request, cart):
     return render(request, 'quiz/carte.html', context)
 
 def reviser_certaines_cartes(request, revision_instance):#revision_instance c'est la liste des id des cartes reviews
-    revision_instance = Revision.objects.get(pk=revision_instance)
-    cartes_id = revision_instance.cartes.values_list('id', flat=True)
+    cartes_id = cartes.values_list('id', flat=True)
     liste_cartes_id = list(cartes_id)
     if revision_instance.cartes.count() == 0:
         return redirect('home')
