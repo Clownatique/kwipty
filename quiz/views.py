@@ -47,8 +47,10 @@ def reviser_certaines_cartes(request, revision_instance):#revision_instance c'es
     carte_index = cartes_id[0]
     return redirect('reviser_carte', revision_instance.id, carte_index)
 
-
-
+def creer_une_carte(request):
+    context = {
+        
+    }
 
 
 
