@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'colorfield'
 ]
 
-AUTH_USER_MODEL = "compte.Eleves" 
+AUTH_USER_MODEL = "compte.Eleve" 
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
