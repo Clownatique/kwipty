@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from quiz.models import FlashCarte, CardReview
+from quiz.models import FlashCarte, DonnesRevision
 from django.core import serializers
 import uuid
 

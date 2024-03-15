@@ -71,7 +71,7 @@ class DonnesRevision(models.Model):
         (4, 'A Refaire immédiatement') # L'utilisateur souhaite explicitement revoir cette carte
     ]
     carte = models.ForeignKey(FlashCarte, on_delete=models.CASCADE)
-    difficulty = models.IntegerField(choices=DIFFICULTY_CHOICES, default=2)
+    difficulty = models.IntegerField(choices=facilite_reconnaissance, default=2)
     date_de_revue = models.DateTimeField()
     apprise = models.BooleanField(default=False)
     demiapprise = models.BooleanField(default=False)
