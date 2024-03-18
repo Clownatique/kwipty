@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carte disponibles</title>
+   <style>
+	ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+  background-color: #111;
+}
+   
+   </style>
+</head>
+
+<body>
+    <ul>
+        <li><a href="#Synaptiko">Synaptiko</a></li>
+        <li><a href="#Cartes Disponible">Cartes disponible</a></li>
+        <li><a href="#Se connecter">Se connecter</a></li>
+        <li><a href="#S'inscrire">S'inscrire</a></li>
+        <li><a href="#Un probléme ?">Un probléme ?</a></li>
+        <li><a href="#A propos">A propos</a></li>
+      </ul>
+      <h1> Cartes disponible</h1>
+      <ol>
+        <li>Q: Quel est le record du monde du saut en longueur masculin ?
+            R: Le record du monde du saut en longueur masculin est de 8,95 mètres, détenu par Mike Powell depuis 1991.</li>
+        <li>Q: Quelle est la distance officielle d'un marathon ?
+            R: La distance officielle d'un marathon est de 42,195 kilomètres.</li>
+        <li>Q: Quel joueur de tennis détient le record du plus grand nombre de titres du Grand Chelem en simple masculin ?
+            R: Roger Federer détient le record du plus grand nombre de titres du Grand Chelem en simple masculin, avec 20 titres</li>
+        <li>Q: Quelle équipe nationale de football a remporté le plus de Coupes du Monde ?
+            R: L'équipe nationale de football du Brésil a remporté le plus de Coupes du Monde, avec un total de cinq titres.</li>
+        <li>Q: Combien de joueurs composent une équipe de water-polo lors d'un match ?
+            R: Une équipe de water-polo compte sept joueurs dans l'eau et six remplaçants sur le banc.</li>
+        <li>Q: Quelle est la durée d'un quart-temps dans un match de basketball de la NBA ?
+            R: Un quart-temps dans un match de basketball de la NBA dure 12 minutes.</li>
+        <li>Q: Quel est le seul pays à avoir remporté la Coupe du Monde de cricket à cinq reprises ?
+            R: L'Australie est le seul pays à avoir remporté la Coupe du Monde de cricket à cinq reprises.</li>
+        <li>Q: Quel est le nom du trophée remis au vainqueur du Tour de France ?
+            R: Le trophée remis au vainqueur du Tour de France est appelé le "Maillot Jaune".</li>
+        <li>Q: Combien de temps dure un round dans un combat de boxe amateur ?
+            R: Un round dans un combat de boxe amateur dure trois minutes.</li>
+    </ol>
+</body>
+</html>
