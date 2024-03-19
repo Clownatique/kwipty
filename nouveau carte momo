@@ -30,11 +30,26 @@ li a {
 li a:hover {
   background-color: #111;
 }
-   
+.carte {
+    padding:20px;
+    border: 1px outset black;
+  background-color: lightgoldenrodyellow;    
+  margin-top: 50px;
+  margin-bottom: auto;
+  margin-left: 70px;
+  margin-right: 70px;
+}
+
+
+.carte q {
+    
+}
    </style>
 </head>
-
+     
 <body>
+    <h1> Cartes dispoible </h1>
+
     <ul>
         <li><a href="#Synaptiko">Synaptiko</a></li>
         <li><a href="#Cartes Disponible">Cartes disponible</a></li>
@@ -42,27 +57,9 @@ li a:hover {
         <li><a href="#S'inscrire">S'inscrire</a></li>
         <li><a href="#Un probléme ?">Un probléme ?</a></li>
         <li><a href="#A propos">A propos</a></li>
-      </ul>
-      <h1> Cartes disponible</h1>
-      <ol>
-        <li>Q: Quel est le record du monde du saut en longueur masculin ?
-            R: Le record du monde du saut en longueur masculin est de 8,95 mètres, détenu par Mike Powell depuis 1991.</li>
-        <li>Q: Quelle est la distance officielle d'un marathon ?
-            R: La distance officielle d'un marathon est de 42,195 kilomètres.</li>
-        <li>Q: Quel joueur de tennis détient le record du plus grand nombre de titres du Grand Chelem en simple masculin ?
-            R: Roger Federer détient le record du plus grand nombre de titres du Grand Chelem en simple masculin, avec 20 titres</li>
-        <li>Q: Quelle équipe nationale de football a remporté le plus de Coupes du Monde ?
-            R: L'équipe nationale de football du Brésil a remporté le plus de Coupes du Monde, avec un total de cinq titres.</li>
-        <li>Q: Combien de joueurs composent une équipe de water-polo lors d'un match ?
-            R: Une équipe de water-polo compte sept joueurs dans l'eau et six remplaçants sur le banc.</li>
-        <li>Q: Quelle est la durée d'un quart-temps dans un match de basketball de la NBA ?
-            R: Un quart-temps dans un match de basketball de la NBA dure 12 minutes.</li>
-        <li>Q: Quel est le seul pays à avoir remporté la Coupe du Monde de cricket à cinq reprises ?
-            R: L'Australie est le seul pays à avoir remporté la Coupe du Monde de cricket à cinq reprises.</li>
-        <li>Q: Quel est le nom du trophée remis au vainqueur du Tour de France ?
-            R: Le trophée remis au vainqueur du Tour de France est appelé le "Maillot Jaune".</li>
-        <li>Q: Combien de temps dure un round dans un combat de boxe amateur ?
-            R: Un round dans un combat de boxe amateur dure trois minutes.</li>
-    </ol>
+    </ul>
+    <div class="carte">
+            <q>Q: Quel est le record du monde du saut en longueur masculin ?</q>            <q>R: Le record du monde du saut en longueur masculin est de 8,95 mètres, détenu par Mike Powell depuis 1991.</q>
+    </div>
 </body>
 </html>
