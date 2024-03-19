@@ -1,19 +1,19 @@
 from django.shortcuts import render, redirect
-from .models import FlashCarte, CardReview
+from .models import FlashCarte, DonnesRevision
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.template import loader
-from .forms import FlashCarteForm, UpdateDue
+#from .forms import FlashCarteForm, UpdateDue
 import json
 from django.core.serializers.json import DjangoJSONEncoder
 from django.urls import reverse
-from .forms import UpdateDue
+#from .forms import UpdateDue
 
 def maj_donnes_revision(request, revision_instance, cartereview_id):
     if request.method == "POST":
         form = UpdateDue(request.POST)
         if form.is_valid():
-            card_revue = CardReview.objects.get(id=cartereview_id)
+            card_revue = DonnesRevision.objects.get(id=cartereview_id)
             #revision = Revision.objects.get(id=revision_instance)
 
             difficulty = form.cleaned_data['difficulty']

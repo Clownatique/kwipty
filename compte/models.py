@@ -14,6 +14,6 @@ class Eleve(AbstractUser):
     nom = models.CharField(max_length=50)
     prenom = models.CharField(max_length=50)
     email = models.EmailField(max_length=254)
-    deck = models.ManyToManyField("quiz.CardReview")
+    deck = models.ManyToManyField("quiz.DonnesRevision")
     def __str__(self):
         return self.username

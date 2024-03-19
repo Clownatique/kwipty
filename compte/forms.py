@@ -1,13 +1,13 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from .models import Eleves
+from .models import Eleve
 from django.contrib.auth.forms import AuthenticationForm
 from django.db.models import Q
 from django.utils import timezone
 
 class CreationElevesForms(UserCreationForm):
     class Meta:
-        model = Eleves
+        model = Eleve
         fields = UserCreationForm.Meta.fields + ('nom', 'prenom', 'email')
 
     def save(self, commit=True):
@@ -26,7 +26,7 @@ class ChangeElevesForms(UserChangeForm):
     cursus_classe = forms.ChoiceField(choices=classes, required=True)
     
     class Meta:
-        model = Eleves
+        model = Eleve
         fields = UserCreationForm.Meta.fields + ('cursus_classe','nom', 'prenom', 'email')
 
     def save(self, commit=True):

@@ -78,7 +78,7 @@ class DonnesRevision(models.Model):
     ease = models.FloatField(default=2.5)
 
     def __str__(self):
-        return f"CardReview {self.id}"
+        return f"DonnesRevision {self.id}"
 
     def maj_prochaine_revue(self):
         days_to_add = 0
@@ -125,4 +125,4 @@ class DonnesRevision(models.Model):
         else:
             self.apprise = False
 
-        super(CardReview, self).save(*args, **kwargs)
+        super(DonnesRevision, self).save(*args, **kwargs)
