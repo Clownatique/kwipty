@@ -49,9 +49,10 @@ def reviser_certaines_cartes(request, revision_instance):#revision_instance c'es
 
 def creer_une_carte(request):
     context = {
-        
+        'carte':carte
     }
-
+    template = loader.get_template("../templates/quiz/creer_cartes.html")
+    return render(carte)
 
 
 
