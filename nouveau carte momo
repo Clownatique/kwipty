@@ -48,7 +48,7 @@ li a:hover {
 </head>
      
 <body>
-    <h1> Cartes dispoible </h1>
+    <h1> Cartes disponible </h1>
 
     <ul>
         <li><a href="#Synaptiko">Synaptiko</a></li>
