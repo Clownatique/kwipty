@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .forms import CreationElevesForms, ChangeElevesForms
+from .forms import CreationEleveForms, ChangeEleveForms
 from .models import Eleve
 
 class EleveAdmin(admin.ModelAdmin):

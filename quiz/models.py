@@ -31,6 +31,7 @@ class FlashCarte(models.Model):
     dos = models.CharField(max_length=100, blank=True, null=True)
     image_dos = models.ImageField(upload_to='media/image_dos/', blank=True, null=True)
     id = models.AutoField(primary_key=True)
+    champs_supplementaires = models.TextField(blank=True, null = True)
 
     def save(self, *args, **kwargs):
         if self.image_devant:
@@ -52,9 +53,16 @@ class FlashCarte(models.Model):
     
     def __str__(self):
         return f'''{self.devant}[10:] - {self.dos}[10:]'''
+
+class PaquetCartes(models.Model):
+    '''Un paquet (le plus souvent à réviser) est comme son nom l'indique un paquet de carte.
+    Il est relatif à plusieurs Données de révision
+
+    A ne pas confondre avec un paquet de carte!!
+
+    '''
     
-    
-class DonnesRevision(models.Model):
+class MetaDonneesCarte(models.Model):
     '''
     Les donnés de révision est lié à une carte pour un utilisateur.
     Elle précise tout ce que le backend a besoin concernant l'apprentissage de cette carte 
@@ -70,54 +78,24 @@ class DonnesRevision(models.Model):
         (3, 'Difficile'),
         (4, 'A Refaire immédiatement') # L'utilisateur souhaite explicitement revoir cette carte
     ]
+    phases = [
+        (0, 'Apprentissage'), #ICI on apprends comme si c'était nouveau
+        (1, 'Approfondissement')
+
+    ]
     carte = models.ForeignKey(FlashCarte, on_delete=models.CASCADE)
-    difficulty = models.IntegerField(choices=facilite_reconnaissance, default=2)
+    autoevaluation_possible = models.IntegerField(choices=facilite_reconnaissance, default=2)
+    phase = models.IntegerField(choices=facilite_reconnaissance, default=0)
+    facilitee_apprentissage = models.FloatField(default=2.5)
+    intervalle = models.CharField(max_length=4, default = 0, null=False, blank=False)
     date_de_revue = models.DateTimeField()
-    apprise = models.BooleanField(default=False)
-    demiapprise = models.BooleanField(default=False)
-    ease = models.FloatField(default=2.5)
 
     def __str__(self):
         return f"CardReview {self.id}"
 
     def maj_prochaine_revue(self):
-        days_to_add = 0
-        if self.apprise == False:
-            if self.difficulty == 1:#FACILE
-                self.date_de_revue += timedelta(days=1)
-                self.apprise = True
-                self.save()
-            elif self.difficulty == 2:#MOYEN
-                if self.demiapprise:
-                    self.date_de_revue += timedelta(hours=12)
-                    self.apprise = True
-                    self.save()
-                else:
-                    self.date_de_revue += timedelta(hours=3)
-                    self.demiapprise = True
-                    self.save()
-            elif self.difficulty == 3:#DIFFICILE
-                self.date_de_revue += timedelta(minutes=2)
-                self.save()
-            elif self.difficulty == 4:#A REFAIRE
-                self.date_de_revue += timedelta(seconds=150)
-                self.save()
-        else:
-            if self.difficulty == 1:#FACILE
-                self.date_de_revue *= timedelta(self.date_de_revue*2.5)
-                self.save()
-            elif self.difficulty == 2:#MOYEN
-                self.date_de_revue *= timedelta(self.date_de_revue*2.5)
-                self.save()
-            elif self.difficulty == 3:#DIFFICILE
-                self.apprise = False
-                self.date_de_revue = timedelta()
-                self.ease -= 0.1
-                self.save()
-            elif self.difficulty == 4:#A REFAIRE
-                self.apprise= False
-                self.date_de_revue += timedelta(minutes=1)
-                self.save()
+        
+        self.save()
 
     def save(self, *args, **kwargs):
         if self.date_de_revue >= timezone.now() - timedelta(days=3 * 30):

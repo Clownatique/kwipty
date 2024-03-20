@@ -1,18 +1,24 @@
 from django import forms
-from compte.models import CardReview
+from compte.models import MetaDonneesCarte
 from .models import FlashCarte
+
+#https://docs.djangoproject.com/en/5.0/topics/forms/modelforms/
 
 class FlashCarteForm(forms.ModelForm):
 
     class Meta:
         model = FlashCarte
-        fields = ['tag','devant','image_devant','dos','image_dos']
+        fields = ['type_de_note','devant','image_devant','dos','image_dos']
 
-class MajProchaineRevue(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(MajProchaineRevue, self).__init__(*args, **kwargs)
+        self.fields['difficulte'].widget = forms.RadioSelect(choices=MetaDonneesCarte.facilite_reconnaissance)
+
+class MajProchaineRevue(forms.Form):
     class Meta:
-        model = CardReview
+        model = MetaDonneesCarte
         fields = ['difficulte']
 
     def __init__(self, *args, **kwargs):
-        super(UpdateDue, self).__init__(*args, **kwargs)
-        self.fields['difficulte'].widget = forms.RadioSelect(choices=DonnesRevision.facilite_reconnaissance)
+        super(MajProchaineRevue, self).__init__(*args, **kwargs)
+        self.fields['difficulte'].widget = forms.RadioSelect(choices=MetaDonneesCarte.facilite_reconnaissance)

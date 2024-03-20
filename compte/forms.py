@@ -5,7 +5,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.db.models import Q
 from django.utils import timezone
 
-class CreationElevesForms(UserCreationForm):
+class CreationEleveForms(UserCreationForm):
     class Meta:
         model = Eleve
         fields = UserCreationForm.Meta.fields + ('nom', 'prenom', 'email')
@@ -17,7 +17,7 @@ class CreationElevesForms(UserCreationForm):
 
         return utilisateur
 
-class ChangeElevesForms(UserChangeForm):
+class ChangeEleveForms(UserChangeForm):
     classes = [
         ('License - 1ere Année', 'L1'),
         ('Tale', 'Lycée - Terminale'),
