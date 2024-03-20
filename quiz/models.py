@@ -61,6 +61,7 @@ class PaquetCartes(models.Model):
     A ne pas confondre avec un paquet de carte!!
 
     '''
+    pass
     
 class MetaDonneesCarte(models.Model):
     '''
@@ -94,13 +95,9 @@ class MetaDonneesCarte(models.Model):
         return f"DonnesRevision {self.id}"
 
     def maj_prochaine_revue(self):
-        
-        self.save()
+        '''
+        fonction qui peut changer la date de revue, l'intervalle, la facilitee, la phase 
+        EN FONCTION de l'utilisateur
+        '''
+        pass
 
-    def save(self, *args, **kwargs):
-        if self.date_de_revue >= timezone.now() - timedelta(days=3 * 30):
-            self.apprise = True
-        else:
-            self.apprise = False
-
-        super(DonnesRevision, self).save(*args, **kwargs)

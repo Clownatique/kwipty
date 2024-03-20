@@ -11,7 +11,7 @@
         "cours/.directory": false,
         "cours/admin.py": false,
         "cours/apps.py": false,
-        "compte/apps.py": false,
+        "compte/apps.py": true,
         "exercices/__init__.py": false,
         "exercices/.directory": false,
         "exercices/admin.py": false,
@@ -26,6 +26,7 @@
         "quiz/__init__.py": false,
         "quiz/.directory": false,
         "quiz/admin.py": false,
-        "quiz/apps.py": false
+        "quiz/apps.py": false,
+        "Pipfile": true
     }
 }
