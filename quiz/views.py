@@ -13,7 +13,7 @@ def maj_donnes_revision(request, revision_instance, cartereview_id):
     if request.method == "POST":
         form = MajProchaineRevue(request.POST)
         if form.is_valid():
-            card_revue = CardReview.objects.get(id=cartereview_id)
+            card_revue = DonnesRevision.objects.get(id=cartereview_id)
             #revision = Revision.objects.get(id=revision_instance)
 
             difficulty = form.cleaned_data['difficulty']
@@ -47,9 +47,12 @@ def reviser_certaines_cartes(request, revision_instance):#revision_instance c'es
     carte_index = cartes_id[0]
     return redirect('reviser_carte', revision_instance.id, carte_index)
 
-
-
-
+def creer_une_carte(request):
+    context = {
+        'carte':carte
+    }
+    template = loader.get_template("../templates/quiz/creer_cartes.html")
+    return render(carte)
 
 
 

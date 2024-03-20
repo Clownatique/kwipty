@@ -91,7 +91,7 @@ class MetaDonneesCarte(models.Model):
     date_de_revue = models.DateTimeField()
 
     def __str__(self):
-        return f"CardReview {self.id}"
+        return f"DonnesRevision {self.id}"
 
     def maj_prochaine_revue(self):
         
@@ -103,4 +103,4 @@ class MetaDonneesCarte(models.Model):
         else:
             self.apprise = False
 
-        super(CardReview, self).save(*args, **kwargs)
+        super(DonnesRevision, self).save(*args, **kwargs)

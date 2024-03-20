@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carte disponibles</title>
+   <style>
+	ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+  background-color: #111;
+}
+.carte {
+    padding:20px;
+    border: 1px outset black;
+  background-color: lightgoldenrodyellow;    
+  margin-top: 50px;
+  margin-bottom: auto;
+  margin-left: 70px;
+  margin-right: 70px;
+}
+
+
+.carte q {
+    
+}
+   </style>
+</head>
+     
+<body>
+    <h1> Cartes disponible </h1>
+
+    <ul>
+        <li><a href="#Synaptiko">Synaptiko</a></li>
+        <li><a href="#Cartes Disponible">Cartes disponible</a></li>
+        <li><a href="#Se connecter">Se connecter</a></li>
+        <li><a href="#S'inscrire">S'inscrire</a></li>
+        <li><a href="#Un probléme ?">Un probléme ?</a></li>
+        <li><a href="#A propos">A propos</a></li>
+    </ul>
+    <div class="carte">
+            <q>Q: Quel est le record du monde du saut en longueur masculin ?</q>            <q>R: Le record du monde du saut en longueur masculin est de 8,95 mètres, détenu par Mike Powell depuis 1991.</q>
+    </div>
+</body>
+</html>
