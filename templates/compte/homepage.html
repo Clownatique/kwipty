@@ -3,7 +3,7 @@
 Bienvenue sur en5minutes!!
 {% if utilisateur.is_authenticated %}
 Bonjour {{utilisateur.prenom}} ! 
-<a href={% url 'dashboard' %}>Travail</a>
+<a href={% url 'menu' %}>Travail</a>
 {% else %}
 <a href={% url 'connexion' %}>Se connecter</a>
 {% endif %}

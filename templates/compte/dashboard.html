@@ -24,7 +24,7 @@
         <img src="info.png">
         <div>
             <p> Bonjour, {{request.user.prenom}}</p>
-            <p href="{% url 'logout' %}"> Se déconnecter </p>
+            <a href="{% url 'logout' %}"><p> Se déconnecter </p></a>
         </div>
         <p> Réglage </p>
     </div>
@@ -63,13 +63,19 @@
         {% if cartes is not None %}
         <a class="reviser" href="{% url 'reviser_cartes' revision_instance.id %}">
             <button>
-                Réviser les cartes!!
+                Revoir toute vos cartes
             </button>
         </a>
         {% else %}
         <a class="reviser">
+            <p> Pas Encore De Cartes Disponibles !! </p>
+            <a href="{% url 'creer-carte' %}">
+                <button>
+                    Créer des cartes
+                </button>
+            </a>
             <button>
-                pas encore de cartes disponibles
+                Rechercher des cartes parmis celle déjà existente
             </button>
         </a>
         {% endif %}
@@ -77,7 +83,7 @@
     <div class="info">
         <ul class="exercices">
             {% if exercices|length is 0 %}
-            pas d'exo mdr
+            
             {% else %}
             {% for exercice in exercices %}
             <li class="exo">

@@ -1,0 +1,28 @@
+{
+    "files.exclude": {
+        "Pipfile.lock": true,
+        "README.md": true,
+        "Pipfile": true,
+        "manage.py": true,
+        "djangoenv": true,
+        "quiz/tests.py": true,
+        "quiz/apps.py": true,
+        "quiz/admin.py": true,
+        "quiz/.directory": true,
+        "quiz/__init__.py": true,
+        "quiz/migrations": true,
+        "quiz/__pycache__": true,
+        "connaissance/__pycache__": true,
+        "connaissance/migrations": true,
+        "connaissance/__init__.py": true,
+        "compte/__pycache__": true,
+        "compte/migrations": true,
+        "compte/__init__.py": true,
+        "compte/.directory": true,
+        "compte/admin.py": true,
+        "static/colorfield": true,
+        "static/admin": true,
+        "static/init": true,
+        "test.sqlite3": true
+    }
+}

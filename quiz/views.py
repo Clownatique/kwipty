@@ -14,14 +14,8 @@ def maj_donnes_revision(request, revision_instance, cartereview_id):
         form = MajProchaineRevue(request.POST)
         if form.is_valid():
             card_revue = DonnesRevision.objects.get(id=cartereview_id)
-            #revision = Revision.objects.get(id=revision_instance)
-
             difficulty = form.cleaned_data['difficulty']
             card_revue.update_review_date()
-            #if card_revue.apprise == True: 
-            #    revision.cartes.remove(card_revue)
-            #    revision.save()
-
             return redirect('dashboard')
 
 def voir_cartes(request):
@@ -39,20 +33,8 @@ def reviser_carte(request, cart):
     }
     return render(request, 'quiz/carte.html', context)
 
-def reviser_certaines_cartes(request, revision_instance):#revision_instance c'est la liste des id des cartes reviews
-    cartes_id = cartes.values_list('id', flat=True)
-    liste_cartes_id = list(cartes_id)
-    if revision_instance.cartes.count() == 0:
-        return redirect('home')
-    carte_index = cartes_id[0]
-    return redirect('reviser_carte', revision_instance.id, carte_index)
-
 def creer_une_carte(request):
-    context = {
-        'carte':carte
-    }
-    template = loader.get_template("../templates/quiz/creer_cartes.html")
-    return render(carte)
+    return render(request, "../templates/quiz/creation_flashcarte.html")
 
 
 

@@ -37,22 +37,29 @@ def menu_principal(request):
     Tout est prêt pour lui:
     quelques données pour lui rappeller ce qu'il va avoir réviser
     (nombre de cartes, temps de révision estimé selon son temps passé sur une carte)
+    https://www.justinmind.com/ui-design/dashboard-design-best-practices-ux
     '''
     if request.user.is_authenticated:
-        liste_matieres_par_categorie = []
 
         context = {
-            #'matiere': matiere,
-            #'liste_cours':liste_cours,
-            #'cartes':cartes_utilisateur_cours,
-            #'cartes_non_apprises':cartes_utilisateur_cours,
-            #'nombre_cartes_apprises':nombre_cartes_apprises,
-            #'tag_counts':tag_counts,
-            #'exercices':exercices,
-            "liste_matieres_par_categorie": liste_matieres_par_categorie
         }
-        template = loader.get_template('compte/dashboard.html')
 
-        return HttpResponse(template.render(context,request))
+        return render(request, 'compte/dashboard.html', context)
     else:
         return render(request, 'pasconnecte.html')
+
+def menu_tuto(request):
+    '''
+    Ici faire une page TRÈS IMPORTANTE pour l'ux:
+
+    le tutoriel du menu principal.
+
+    cette page va, à l'aide de plusieurs pages html,
+    reprendre le menu principal afin d'en faire un tour complet.
+
+    TODO:
+    - Si l'utilisateur a déjà vu cette page, lui demander si il a besoin de le revoir ou si il a juste malcliqué
+    '''
+
+
+    pass

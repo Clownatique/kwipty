@@ -10,7 +10,7 @@ class FlashCarteForm(forms.ModelForm):
     '''
     class Meta:
         model = FlashCarte
-        fields = ['type_de_note','devant','image_devant','dos','image_dos']
+        fields = '__all__'
 
     def __init__(self, *args, **kwargs):
         super(MajProchaineRevue, self).__init__(*args, **kwargs)
