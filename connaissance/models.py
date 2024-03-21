@@ -1,4 +1,5 @@
 from django.db import models
+from django.forms import ModelForm, Textarea
 
 class Cours(models.Model):
     '''
@@ -13,3 +14,14 @@ class Cours(models.Model):
     titre = models.CharField(max_length=50)
     parent = models.ForeignKey("self", on_delete=models.CASCADE, null=True, blank=True)
     document = models.FileField(upload_to=None, max_length=100)
+
+
+
+class CoursForm(ModelForm):
+    class Meta:
+        model = Cours
+        fields =  "__all__"
+        widgets = {
+            "titre": Textarea(attrs={"cols": 80, "rows": 20}),
+            "titre": Textarea(attrs={"cols": 80, "rows": 20}),
+        }

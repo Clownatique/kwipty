@@ -26,7 +26,7 @@ class CustomLoginView(LoginView):
 
 class SignUpView(generic.CreateView):
     form_class = CreationEleveForms
-    success_url = reverse_lazy("login")
+    success_url = reverse_lazy("connexion")
     template_name = "compte/inscription.html"
 
 def menu_principal(request):

@@ -60,6 +60,8 @@ class PaquetCartes(models.Model):
 
     A ne pas confondre avec un paquet de carte!!
 
+    /!\ SUREMENT BIENTOT A SUPPRIMER
+
     '''
     pass
     
@@ -84,6 +86,7 @@ class MetaDonneesCarte(models.Model):
         (1, 'Approfondissement')
 
     ]
+    utilisateur = models.For
     carte = models.ForeignKey(FlashCarte, on_delete=models.CASCADE)
     autoevaluation_possible = models.IntegerField(choices=facilite_reconnaissance, default=2)
     phase = models.IntegerField(choices=facilite_reconnaissance, default=0)

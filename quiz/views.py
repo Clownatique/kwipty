@@ -19,17 +19,16 @@ def maj_donnes_revision(request, revision_instance, cartereview_id):
             return redirect('dashboard')
 
 def voir_cartes(request):
-    cartes = FlashCarte.objects.all()
+    cartes = request.user.dek
     context = {
         'cartes':cartes
     }
-    return render(request, 'quiz/blank.html', context)
+    return render(request, 'quiz/nouveau carte momo.html', context)
 
-def reviser_carte(request, cart):
-    context = { 
-        'form':form,
-        'carte':carte_etudiee_dict,
-        'revision':revision.id
+def reviser_carte(request, flashcarteid):
+    flashcarte = FlashCarte.objects.get(id = flashcarteid)
+    context = {
+        'carte':flashcarte
     }
     return render(request, 'quiz/carte.html', context)
 
