@@ -32,37 +32,20 @@ def reviser_carte(request, flashcarteid):
     }
     return render(request, 'quiz/carte.html', context)
 
-def creer_une_carte(request):
-    return render(request, "../templates/quiz/creation_flashcarte.html")
+class creer_une_carte(FlashCarteForm):
+    '''
+    Views qui va afficher le template de victor pour créer une carte
+    Inspire toi au maximum de ce que tu vois dans l'application compte.
+    Si il y a des problèmes, je t'ai envoyé des ressources pouvant aider.
+    voir urls.py pour faire en sorte de rendre ce formulaire accessible,
+    models.py pour comprendre ce que tu dois demander à l'utilisateur,
+    et bien évidemment forms.py là ou tu dois faire tout cela.
 
+    edit :
+    je viens de peu à peu de comprendre qu'il y a plusieurs manières de faire 
+    des forms. (en passant par model.py, views.py, ou forms.py).
 
-
-
-
-
-
-
-
-
-
-
-
-
-#    revision= Revision.objects.get(id=revision_instance)
-#    cartes_revues = revision.cartes.all()
-#    liste = []
-#    
-#    flashcarte_instances = cartes_revues.values_list('carte', flat=True)
-#    
-#    # If you need the actual Flashcarte instances, you can use the 'in' filter
-#    flashcarte_queryset = FlashCarte.objects.filter(pk__in=flashcarte_instances)
-#
-#    serialized_data = list(flashcarte_queryset.values())
-#    json_data = json.dumps(serialized_data, cls=DjangoJSONEncoder)
-#
-#    context = {
-#        'cartes':json_data,
-#    }
-#    
-#    return render(request, 'quiz/carte.html', context)
-#
+    Concentre toi sur cette dernière
+    '''
+    template_name = 'quiz/creation_flashcarte.html'  # specify your login template
+    form_class = FlashCarteForm

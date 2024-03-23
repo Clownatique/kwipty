@@ -1,7 +1,8 @@
 {% extends 'baseavecnavbar.html' %}
 {% block content %}
 {% for carte in cartes %}
-  <q> {{?}} </q> 
+  <q> {{carte.devant}} </q>
+  <q> {{carte.dos}} </q> 
 {% endfor %}
 {% endblock content %}
 

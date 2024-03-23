@@ -1,0 +1,6 @@
+[] Vérifier d'avoir installé l'extension "Simple Hide Files"
+[] Ouvrir une nouvelle fenêtre (fichier>nouvelle fenetre)
+[] Recloner le repository "revision en 5 minutes"
+[] Ouvrir un terminal : (Terminal>Nouveau terminal)
+[] "source djangoenv/bin/activate" pour lancer l'environnement python
+[] "python3 manage.py runserver" pour utiliser le serveur

@@ -13,8 +13,12 @@ class FlashCarteForm(forms.ModelForm):
         fields = '__all__'
 
     def __init__(self, *args, **kwargs):
-        super(MajProchaineRevue, self).__init__(*args, **kwargs)
-        self.fields['difficulte'].widget = forms.RadioSelect(choices=MetaDonneesCarte.facilite_reconnaissance)
+        super(FlashCarteForm, self).__init__(*args, **kwargs)
+        self.fields['dos'].widget = '?'
+        self.fields['devant'].widget = '?' 
+        #le reste des champs, voir dans quiz/models.py
+    def save(self, commit = True):
+        pass
 
 class MajProchaineRevue(forms.Form):
     '''
