@@ -4,3 +4,6 @@
 [] Ouvrir un terminal : (Terminal>Nouveau terminal)
 [] "source djangoenv/bin/activate" pour lancer l'environnement python
 [] "python3 manage.py runserver" pour utiliser le serveur
+
+ensuite, envoyez moi les fichiers que vous avez modifié (ou cas ou github fais nptk)
+sinon, faites source(icone d'arborescence sur le côté)>commit>résumez vos modifications/avancés.
