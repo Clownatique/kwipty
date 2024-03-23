@@ -52,7 +52,7 @@ class FlashCarte(models.Model):
             image.save(self.image_devant.path, image)
     
     def __str__(self):
-        return f'''{self.devant}[10:] - {self.dos}[10:]'''
+        return f'''{self.devant}'''[:10] + f'''{self.dos}'''[:10]
 
 class PaquetCartes(models.Model):
     '''Un paquet (le plus souvent à réviser) est comme son nom l'indique un paquet de carte.
@@ -86,7 +86,7 @@ class MetaDonneesCarte(models.Model):
         (1, 'Approfondissement')
 
     ]
-    utilisateur = models.For
+    ##utilisateur = models.For
     carte = models.ForeignKey(FlashCarte, on_delete=models.CASCADE)
     autoevaluation_possible = models.IntegerField(choices=facilite_reconnaissance, default=2)
     phase = models.IntegerField(choices=facilite_reconnaissance, default=0)

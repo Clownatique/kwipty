@@ -19,7 +19,7 @@ def maj_donnes_revision(request, revision_instance, cartereview_id):
             return redirect('dashboard')
 
 def voir_cartes(request):
-    cartes = request.user.dek
+    cartes = FlashCarte.objects.all()
     context = {
         'cartes':cartes
     }

@@ -10,6 +10,7 @@
 <div class="metaQuestion">
     <div class="carte" id="carte" onclick="montrerReponse(index)">
       <div class="front">
+        {}
       </div>
       <div class="back">
       </div>
@@ -21,11 +22,10 @@
   <li style="background-color: orange;" class="difficultyButton" onclick="prepareNextQuestion(3)">C'est pas encore ça!</li>
   <li style="background-color: red;" class="difficultyButton" onclick="prepareNextQuestion(4)">A Revoir.</li>
 </ul>
-<form method="post" action="{% url 'update_carte_review' revision carte.id %}" id="form">
+<form method="post" action="{% url 'maj-metadonnes' carte.id %}" id="form">
   {% csrf_token %}
   {{ form.as_div }}
-  <button type="submit">Submit</button> <!---->
-</form>
+  <button type="submit">Submit</button>
 <script>
   const carte = {{ carte|safe }};
 </script>

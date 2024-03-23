@@ -1,7 +1,6 @@
 const autotestul = document.getElementById('form');
 const front = document.querySelector('.front');
 const back = document.querySelector('.back');
-const progression = document.getElementById('cartesRestantes')
 let index = 0;
 
 cartesDues = []

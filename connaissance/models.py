@@ -15,13 +15,11 @@ class Cours(models.Model):
     parent = models.ForeignKey("self", on_delete=models.CASCADE, null=True, blank=True)
     document = models.FileField(upload_to=None, max_length=100)
 
-
-
 class CoursForm(ModelForm):
     class Meta:
         model = Cours
         fields =  "__all__"
         widgets = {
             "titre": Textarea(attrs={"cols": 80, "rows": 20}),
-            "titre": Textarea(attrs={"cols": 80, "rows": 20}),
+            "parent": Textarea(attrs={"cols": 80, "rows": 20}),
         }
