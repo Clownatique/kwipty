@@ -42,11 +42,12 @@
         </div>
     </div>
     <div class="info cartes">
+        {{deck}}
         <div class="progression">
             <a><img src="../media/icones/icone_carte.png.png" sizes="3"></a>
             <progress max="{{cartes|length}}" value="{{nombre_cartes_apprises}}"></progress>
         </div>
-        <a href="{% url 'voir-cartes' %}">voir les cartes</a>
+        <a href="{% url 'voir-cartes-perso' %}">voir les cartes</a>
         <div class="info_revision">
             <li class="liste_cours">
                 {% for tag, count in tag_counts.items %}
@@ -74,10 +75,11 @@
                     Créer des cartes
                 </button>
             </a>
-            <button>
-                Rechercher des cartes parmis celle déjà existente
-            </button>
-        </a>
+            <a href='{% url 'voir-cartes' %}'>
+                <button>
+                    Rechercher des cartes parmis celle déjà existente
+                </button>
+             </a>
         {% endif %}
     </div>
     <div class="info">

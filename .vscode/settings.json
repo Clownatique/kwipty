@@ -10,19 +10,15 @@
         "quiz/admin.py": true,
         "quiz/.directory": true,
         "quiz/__init__.py": true,
-        "quiz/migrations": true,
         "quiz/__pycache__": true,
         "connaissance/__pycache__": true,
-        "connaissance/migrations": true,
         "connaissance/__init__.py": true,
         "compte/__pycache__": true,
-        "compte/migrations": true,
         "compte/__init__.py": true,
         "compte/.directory": true,
         "compte/admin.py": true,
         "static/colorfield": true,
         "static/admin": true,
-        "static/init": true,
-        "test.sqlite3": true
+        "static/init": true
     }
 }

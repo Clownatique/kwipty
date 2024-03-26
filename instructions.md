@@ -7,3 +7,12 @@
 
 ensuite, envoyez moi les fichiers que vous avez modifié (ou cas ou github fais nptk)
 sinon, faites source(icone d'arborescence sur le côté)>commit>résumez vos modifications/avancés.
+
+LOGIN TESTPROFILES:
+- usertest
+login : usertest
+password : y,}=VZRPe6y_&!Hst
+
+-admin
+login : admin
+password : admin

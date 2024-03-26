@@ -9,6 +9,7 @@ from django.views.generic.edit import CreateView
 from django.contrib.auth.views import LoginView
 from django.views.generic import View
 from django.shortcuts import redirect
+from compte.models import DeckUtilisateur
 
 def page_accueil(request):
     '''
@@ -40,8 +41,9 @@ def menu_principal(request):
     https://www.justinmind.com/ui-design/dashboard-design-best-practices-ux
     '''
     if request.user.is_authenticated:
-
+        deck = DeckUtilisateur.objects.get(pk = request.user.id)
         context = {
+            'deck':deck
         }
 
         return render(request, 'compte/dashboard.html', context)

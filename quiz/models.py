@@ -32,6 +32,7 @@ class FlashCarte(models.Model):
     image_dos = models.ImageField(upload_to='media/image_dos/', blank=True, null=True)
     id = models.AutoField(primary_key=True)
     champs_supplementaires = models.TextField(blank=True, null = True)
+    publique = models.BooleanField(default=True)
 
     def save(self, *args, **kwargs):
         if self.image_devant:
@@ -63,7 +64,10 @@ class PaquetCartes(models.Model):
     /!\ SUREMENT BIENTOT A SUPPRIMER
 
     '''
-    pass
+    titre = models.CharField(max_length=50)
+    description = models.CharField(max_length=250)
+    cartes = models.ForeignKey(FlashCarte, on_delete=models.CASCADE, null=True)
+    #stats
     
 class MetaDonneesCarte(models.Model):
     '''
@@ -86,8 +90,8 @@ class MetaDonneesCarte(models.Model):
         (1, 'Approfondissement')
 
     ]
-    ##utilisateur = models.For
     carte = models.ForeignKey(FlashCarte, on_delete=models.CASCADE)
+    eleve = models.ForeignKey("compte.Eleve", on_delete=models.CASCADE, null=True)
     autoevaluation_possible = models.IntegerField(choices=facilite_reconnaissance, default=2)
     phase = models.IntegerField(choices=facilite_reconnaissance, default=0)
     facilitee_apprentissage = models.FloatField(default=2.5)
@@ -103,4 +107,3 @@ class MetaDonneesCarte(models.Model):
         EN FONCTION de l'utilisateur
         '''
         pass
-

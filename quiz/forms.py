@@ -1,6 +1,5 @@
 from django import forms
-from compte.models import MetaDonneesCarte
-from .models import FlashCarte
+from .models import FlashCarte, MetaDonneesCarte
 
 #https://docs.djangoproject.com/en/5.0/topics/forms/modelforms/
 
@@ -11,14 +10,20 @@ class FlashCarteForm(forms.ModelForm):
     class Meta:
         model = FlashCarte
         fields = '__all__'
+#        labels = {
+#            "dos": ("Writer"),
+#        }
+#        help_texts = {
+#            "dos": ("Some useful help text."),
+#        }
+#        error_messages = {
+#            "dos": {
+#                "max_length": ("La question ne doit pas excèder tant de charactère."),
+#            },
+#        }
 
     def __init__(self, *args, **kwargs):
         super(FlashCarteForm, self).__init__(*args, **kwargs)
-        self.fields['dos'].widget = '?'
-        self.fields['devant'].widget = '?' 
-        #le reste des champs, voir dans quiz/models.py
-    def save(self, commit = True):
-        pass
 
 class MajProchaineRevue(forms.Form):
     '''

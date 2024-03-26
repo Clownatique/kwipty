@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import FlashCarte, MetaDonneesCarte
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
@@ -8,6 +8,8 @@ import json
 from django.core.serializers.json import DjangoJSONEncoder
 from django.urls import reverse
 from .forms import MajProchaineRevue
+from compte.models import Eleve, DeckUtilisateur
+from datetime import date
 
 def maj_donnes_revision(request, revision_instance, cartereview_id):
     if request.method == "POST":
@@ -19,11 +21,21 @@ def maj_donnes_revision(request, revision_instance, cartereview_id):
             return redirect('dashboard')
 
 def voir_cartes(request):
-    cartes = FlashCarte.objects.all()
+    cartes = FlashCarte.objects.filter(publique=True)
     context = {
         'cartes':cartes
     }
-    return render(request, 'quiz/nouveau carte momo.html', context)
+    return render(request, 'quiz/liste toutes les cartes .html', context)
+
+def voir_cartes_utilisateur(request):
+    eleve = Eleve.objects.get(pk=request.user.id)
+    deck = get_object_or_404(DeckUtilisateur, pk=request.user.id)
+    cartes = MetaDonneesCarte.objects.filter(eleve=eleve)
+    context = {
+        'deck':deck.cartes,
+        'cartes':cartes
+    }
+    return render(request, 'quiz/liste deck utilisateur.html', context)
 
 def reviser_carte(request, flashcarteid):
     flashcarte = FlashCarte.objects.get(id = flashcarteid)
@@ -32,7 +44,17 @@ def reviser_carte(request, flashcarteid):
     }
     return render(request, 'quiz/carte.html', context)
 
-class creer_une_carte(FlashCarteForm):
+def ajouter_carte(request, carteid):
+    carte = FlashCarte.objects.get(id = carteid)
+    eleve = Eleve.objects.get(id=request.user.id)
+    temp_meta= MetaDonneesCarte.objects.create(carte=carte,
+                                                eleve=eleve,
+                                                date_de_revue=date.today(),
+                                                phase=0)
+    temp_meta.save()
+    return redirect('voir-cartes')
+
+def creer_une_carte(request):
     '''
     Views qui va afficher le template de victor pour créer une carte
     Inspire toi au maximum de ce que tu vois dans l'application compte.
@@ -47,5 +69,9 @@ class creer_une_carte(FlashCarteForm):
 
     Concentre toi sur cette dernière
     '''
-    template_name = 'quiz/creation_flashcarte.html'  # specify your login template
-    form_class = FlashCarteForm
+    carteforme = FlashCarteForm(request.POST)
+    if request.method == "POST":
+        if carteforme.is_valid():
+            carteforme.save()
+            return redirect('voir-cartes')
+    return render(request, 'quiz/creation_flashcarte.html',{'forme': carteforme})  

@@ -1,43 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        p
-{
-    color: red;
-}
-        li
-{
-    color:red;
-}
-        textarea 
-{
-        resize:none;
-    }
-    </style>
-</head>
-<body>
-    <p>
-        <label for="Question">Question:</label>
-
-        <textarea id="Question" name="Question" rows="5" cols="33">
-            
-            </textarea>
-    </p>
-    <p>
-        <label for="Réponse">Réponse:</label>
-
-        <textarea id="Réponse" name="Réponse" rows="5" cols="33">
-            
-            </textarea>
-    </p>
-    <ul>
-        <li>date</li>
-        <li>formule</li>
-    </ul>
-</body>
-</html>
+{% extends '../base.html' %}
+{% block content %}
+    <form method='post'>
+        {% csrf_token %}
+        {{forme.as_div}}
+        <button type="submit">Submit</button>
+    </form>
+{% endblock content %}

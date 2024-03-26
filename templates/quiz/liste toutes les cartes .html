@@ -1,8 +1,11 @@
 {% extends 'baseavecnavbar.html' %}
 {% block content %}
 {% for carte in cartes %}
-  <q> {{carte.devant}} </q>
+<a href={% url 'reviser-carte' carte.id %}>
+  <q>{{carte.devant}} </q>
   <q> {{carte.dos}} </q> 
+</a>
+  <button><a href={% url 'ajout-carte' carte.id %}>Ajouter cette carte !!</a></button>
 {% endfor %}
 {% endblock content %}
 
