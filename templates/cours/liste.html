@@ -1,0 +1,14 @@
+{% extends 'baseavecnavbar.html' %}
+
+{% block content %}
+<h1>Liste des cours par matière</h1>
+{% for matiere in matieres %}
+<h2>{{ matiere }}</h2>
+{% for cour in cours %}
+{{ cour }}
+{% endfor %}
+{% endfor %}
+<br>
+bite
+{{ cours }}
+{% endblock content %}

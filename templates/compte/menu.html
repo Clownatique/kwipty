@@ -68,8 +68,12 @@
             </button>
         </a>
         {% else %}
+        <a class="reviser" href="{% url 'reviser-cartes' %}">
+            <button>
+                Revoir toute vos cartes
+            </button>
+        </a>
         <a class="reviser">
-            <p> Pas Encore De Cartes Disponibles !! </p>
             <a href="{% url 'creer-carte' %}">
                 <button>
                     Créer des cartes
@@ -83,21 +87,8 @@
         {% endif %}
     </div>
     <div class="info">
-        <ul class="exercices">
-            <a href='{% url 'creer-cours' %}'>creer cours</a>
-            {% if exercices|length is 0 %}
-            
-            {% else %}
-            {% for exercice in exercices %}
-            <li class="exo">
-                <a href="{% url 'unourien' session exercice.titre|slugify %}">
-                <p>{{ exercice.titre|default:"Default Title" }}</p>
-                <img src="{{exercice.illustration.path|default_if_none:'../static/cours/default.png'}}">
-                </a>
-            </li>
-            {% endfor %}
-            {% endif %}
-        </ul>
+        <a href='{% url 'creer-cours' %}'>creer cours</a>
+        <a href='{% url 'liste-cours' %}'>liste cours</a>
     </div>
 </div>
 

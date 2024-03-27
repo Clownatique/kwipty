@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import FlashCarte, MetaDonneesCarte
+from .models import FlashCarte, MetaDonneesCarte, PaquetCartes
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.template import loader
@@ -18,7 +18,7 @@ def voir_cartes(request):
     }
     return render(request, 'quiz/liste toutes les cartes .html', context)
 
-def voir_cartes_utilisateur(request):
+def voir_deck(request):
     eleve = Eleve.objects.get(pk=request.user.id)
     deck = DeckUtilisateur.objects.get(pk = request.user.id)
     cartes = MetaDonneesCarte.objects.filter(eleve=eleve)
@@ -44,6 +44,14 @@ def reviser_carte(request, flashcarteid):
     }
     return render(request, 'quiz/carte.html', context)
 
+
+def reviser_cartes_ajourdhui(request):
+    pqt_revision = PaquetCartes.objects.create()
+    cartes_a_reviser = MetaDonneesCarte.objects.filter(date_de_revue=date.today())
+    for carte in cartes_a_reviser:
+        pqt_revision.cartes = carte.carte
+
+
 def ajouter_carte(request, carteid):
     carte = FlashCarte.objects.get(id = carteid)
     eleve = Eleve.objects.get(id=request.user.id)
@@ -55,20 +63,6 @@ def ajouter_carte(request, carteid):
     return redirect('voir-cartes')
 
 def creer_une_carte(request):
-    '''
-    Views qui va afficher le template de victor pour créer une carte
-    Inspire toi au maximum de ce que tu vois dans l'application compte.
-    Si il y a des problèmes, je t'ai envoyé des ressources pouvant aider.
-    voir urls.py pour faire en sorte de rendre ce formulaire accessible,
-    models.py pour comprendre ce que tu dois demander à l'utilisateur,
-    et bien évidemment forms.py là ou tu dois faire tout cela.
-
-    edit :
-    je viens de peu à peu de comprendre qu'il y a plusieurs manières de faire 
-    des forms. (en passant par model.py, views.py, ou forms.py).
-
-    Concentre toi sur cette dernière
-    '''
     carteforme = FlashCarteForm(request.POST)
     if request.method == "POST":
         if carteforme.is_valid():

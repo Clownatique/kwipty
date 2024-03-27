@@ -15,3 +15,6 @@ class Cours(models.Model):
     parent = models.ForeignKey("self", on_delete=models.CASCADE, default=None, null=True, blank=True)
     document = models.FileField(upload_to=None, max_length=100, blank=True,null=True)
     racine = models.BooleanField(default=False, null=False)
+
+    def __str__(self):
+        return self.titre

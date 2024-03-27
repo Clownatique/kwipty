@@ -27,7 +27,6 @@ urlpatterns = [
     path('', include("compte.urls")),
     path('mdr/', include("connaissance.urls")),
     path("compte/", include("django.contrib.auth.urls")),
-    path('moncompte', include("compte.urls")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:

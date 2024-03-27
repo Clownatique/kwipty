@@ -29,8 +29,36 @@
                   }
                 .content{
                     width:90vw;
-                    display:flex;
                     justify-content:center
+                    flex-direction:row;
+                }
+                nav ul {
+                    list-style-type: none;
+                    padding: 0;
+                    margin: 0;
+                }
+                
+                nav ul li {
+                    display: block;
+                    padding: 10px;
+                }
+                
+                nav {
+                    display: none;
+                }
+                
+                .navbar-open {
+                    display: block;
+                    animation: fadeIn 0.3s ease-in-out;
+                }
+                
+                @keyframes fadeIn {
+                    from {
+                        opacity: 0;
+                    }
+                    to {
+                        opacity: 1;
+                    }
                 }
                 {% block style %}
                 {% endblock %}
@@ -38,22 +66,37 @@
         </head>
         
     <body>
-        <div class="navbar">
-            <div class="haut">
-                <ul class="nav-buttons">
-                    <li><a href="#Synaptiko">Synaptiko</a></li>
-                    <li><a href="#Cartes Disponible">Cartes disponible</a></li>
-                    <li><a href="#Un probléme ?">Un probléme ?</a></li>
-                    <li><a href="#A propos">A propos</a></li>
+        <header>
+            <h1>Synaptiko</h1>
+            <button id="toggleNav">Menu</button>
+            <nav id="navbar">
+                <ul>
+                    <li><a href="#">Accueil</a></li>
+                    <li><a href="#">Cours</a></li>
+                    <li><a href="#">Exercices</a></li>
+                    <li><a href="#">Quizs</a></li>
+                    <li><a href="#">À propos</a></li>
                 </ul>
-            </div>
-            <div>
-                <p><a href="#a">Utilisateur emoji ?</a></p>
-            </div>
+                {% if utilisateur.is_authenticated %}
+                Bonjour {{utilisateur.prenom}} ! 
+                <a href={% url 'menu' %}>Travail</a>
+                <a href={% url 'reviser-carte' 1 %}> Réviser </a> 
+                {% else %}
+                <a href={% url 'connexion' %}>Se connecter</a>
+                {%endif%}
+                </div>
+            </nav>
+        </header>
         </div>
         <div class="content">
         {% block content %}
         {% endblock %}
         </div>
+        <script>
+            document.getElementById('toggleNav').addEventListener('click', function() {
+                var navbar = document.getElementById('navbar');
+                navbar.classList.toggle('navbar-open');
+            });
+        </script>            
     </body>
 </html>
