@@ -6,27 +6,19 @@
 {% block scriptperso %}src = "{% static 'quiz/card.js' %}" defer{% endblock scriptperso %} 
 
 {% block content %}
-
 <div class="metaQuestion">
-    <div class="carte" id="carte" onclick="montrerReponse(index)">
+    <div class="carte" id="carte" onclick="montrerReponse();" >
       <div class="front">
-        {}
+        {{carte.devant}}
       </div>
       <div class="back">
+        {{carte.dos}}
       </div>
     </div>
 </div>
-<ul id="autotest" style="display:none;">
-  <li style="background-color: greenyellow;" class="difficultyButton" onclick="prepareNextQuestion(1)">C'est venu d'un coup!!</li>
-  <li style="background-color: rgb(205, 202, 50);" class="difficultyButton" onclick="prepareNextQuestion(2)">C'est pas mal..</li>
-  <li style="background-color: orange;" class="difficultyButton" onclick="prepareNextQuestion(3)">C'est pas encore ça!</li>
-  <li style="background-color: red;" class="difficultyButton" onclick="prepareNextQuestion(4)">A Revoir.</li>
-</ul>
-<form method="post" action="{% url 'maj-metadonnes' carte.id %}" id="form">
+<form method="post" action="" id="form">
   {% csrf_token %}
-  {{ form.as_div }}
+  {{ forme }}
   <button type="submit">Submit</button>
-<script>
-  const carte = {{ carte|safe }};
-</script>
+</form>
 {% endblock content %}

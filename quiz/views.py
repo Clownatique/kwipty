@@ -11,15 +11,6 @@ from .forms import MajProchaineRevue
 from compte.models import Eleve, DeckUtilisateur
 from datetime import date
 
-def maj_donnes_revision(request, revision_instance, cartereview_id):
-    if request.method == "POST":
-        form = MajProchaineRevue(request.POST)
-        if form.is_valid():
-            card_revue = DonnesRevision.objects.get(id=cartereview_id)
-            difficulty = form.cleaned_data['difficulty']
-            card_revue.update_review_date()
-            return redirect('dashboard')
-
 def voir_cartes(request):
     cartes = FlashCarte.objects.filter(publique=True)
     context = {
@@ -29,7 +20,7 @@ def voir_cartes(request):
 
 def voir_cartes_utilisateur(request):
     eleve = Eleve.objects.get(pk=request.user.id)
-    deck = get_object_or_404(DeckUtilisateur, pk=request.user.id)
+    deck = DeckUtilisateur.objects.get(pk = request.user.id)
     cartes = MetaDonneesCarte.objects.filter(eleve=eleve)
     context = {
         'deck':deck.cartes,
@@ -39,8 +30,17 @@ def voir_cartes_utilisateur(request):
 
 def reviser_carte(request, flashcarteid):
     flashcarte = FlashCarte.objects.get(id = flashcarteid)
+    metadonnescarte = MetaDonneesCarte.objects.get(carte=flashcarte, eleve=request.user)
+    if request.method == "POST":
+        forme = MajProchaineRevue(request.POST)
+        if forme.is_valid():
+            autoevaluation_possible = forme.cleaned_data['autoevaluation_possible']
+            metadonnescarte.maj_prochaine_revue(autoevaluation_possible)
+            return redirect('menu')
     context = {
-        'carte':flashcarte
+        'carte':flashcarte,
+        'metadonnescarte':metadonnescarte,
+        'forme':MajProchaineRevue(request.POST),
     }
     return render(request, 'quiz/carte.html', context)
 
@@ -75,3 +75,4 @@ def creer_une_carte(request):
             carteforme.save()
             return redirect('voir-cartes')
     return render(request, 'quiz/creation_flashcarte.html',{'forme': carteforme})  
+

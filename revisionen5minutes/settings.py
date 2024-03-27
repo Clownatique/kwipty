@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'quiz.apps.QuizConfig',
     'compte.apps.CompteConfig',
     'connaissance.apps.ConnaissanceConfig',
-    'colorfield'
 ]
 
 AUTH_USER_MODEL = "compte.Eleve" 

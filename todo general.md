@@ -13,9 +13,6 @@
 L'algorithme de répétition espacée doit être implémenté pour gérer le planning de révision des flashcards. (views.py)
 Les flashcards doivent être présentées aux utilisateurs en fonction de leur niveau de mémorisation et de leur performance lors des révisions précédentes.
 
-### Statistiques de révision :
-Les utilisateurs doivent pouvoir consulter leurs statistiques de révision, telles que le nombre de flashcards révisées, le nombre de réponses correctes, etc.
-
 ### Liste de pages à faire:
 [] Page d'affichages des cartes
 [-] Page pour réviser une carte (templates/quiz/carte.html/)
@@ -24,7 +21,7 @@ Les utilisateurs doivent pouvoir consulter leurs statistiques de révision, tell
 
 ## App "cours"
 - Gestion des cours :
-[] Création, modification et suppression de cours. (forms.py)
+[-] Création, modification et suppression de cours. (forms.py)
  Chaque cours doit contenir un document, et un titre
 - Système de Classement des cours :
 Les cours les plus valorisés seront les plus illustrés, les plus courts, et les plus télécahrgés. (views.py)
@@ -32,6 +29,16 @@ Les cours les plus valorisés seront les plus illustrés, les plus courts, et le
 ### Liste de pages à faire:
 [!] Page d'ajout d'une carte
 []
-[] Page d'affichage des cours
-[] Page pour ajouter un cours
+[-] Page d'affichage des cours
+[-] Page pour ajouter un cours
 [-] Page pour lire un cours
+
+## TODO MOMO:
+
+Navbar vertical
+
+-extends dans tout les templates
+-il faut complèter baseavecnavbar.html pour faire de cette navbar vertical
+- finir le dashboard (y'aura des trucs à l'enlever, y'aura des trucs à rajouter)
+MAIS COMMENCE par déplacer
+- finir les listes de cours, cartes, deck utilisateur

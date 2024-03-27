@@ -36,7 +36,7 @@
         </div>
         <div class="stats">
             <p>Nombre de cartes:  {{cartes|length}}</p>
-            <a href=""><p>Documents associés</p></a>
+            <a><p>Documents associés</p></a>
             <p>Mis en ligne le : {{ cours.date|default_if_none:"non spécifié"}} </p>
             <p>Difficulté : {{cours.difficulte|default_if_none:"non calculé"}}</p>
         </div>
@@ -84,6 +84,7 @@
     </div>
     <div class="info">
         <ul class="exercices">
+            <a href='{% url 'creer-cours' %}'>creer cours</a>
             {% if exercices|length is 0 %}
             
             {% else %}

@@ -1,20 +1,18 @@
-const autotestul = document.getElementById('form');
-const front = document.querySelector('.front');
-const back = document.querySelector('.back');
-let index = 0;
+document.addEventListener('DOMContentLoaded', function() {
+    const autotestul = document.getElementById('form');
+    const cartee = document.getElementById('carte');
 
-cartesDues = []
+    function montrerQuestion() {
+        autotestul.classList.add('hidden');
+    }
 
-function montrerQuestion(currentCardIndex) {
-    front.innerText = carte.devant;
-    autotestul.classList.add('hidden');
-}
+    function montrerReponse() {
+        document.getElementById('carte').classList.toggle('carte-bougeante');
+        autotestul.classList.remove('hidden');
+        cartee.removeEventListener('click', montrerReponse);
+    }
 
-function montrerReponse(currentCardIndex) {
-    back.innerText = carte.dos;
-    document.getElementById('carte').classList.toggle('carte-bougeante');
-    autotestul.classList.remove('hidden');
-    front.removeEventListener(onclick);
-}
+    montrerQuestion();
 
-montrerQuestion();
+    cartee.addEventListener('click', montrerReponse);
+});

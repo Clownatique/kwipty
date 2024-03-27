@@ -80,28 +80,28 @@ class MetaDonneesCarte(models.Model):
     (ça équivaut à tout entièrement refaire mdr)
     '''
     facilite_reconnaissance = [
-        (1, 'Facile'),  #La carte a été facilement assimilé
-        (2, 'Moyen'),   # '' moyennement assimilé
+        (1, 'Facile'),  # La carte a été facilement assimilée
+        (2, 'Moyen'),   # '' moyennement assimilée
         (3, 'Difficile'),
         (4, 'A Refaire immédiatement') # L'utilisateur souhaite explicitement revoir cette carte
     ]
     phases = [
-        (0, 'Apprentissage'), #ICI on apprends comme si c'était nouveau
+        (0, 'Apprentissage'), # ICI on apprend comme si c'était nouveau
         (1, 'Approfondissement')
-
     ]
+
     carte = models.ForeignKey(FlashCarte, on_delete=models.CASCADE)
     eleve = models.ForeignKey("compte.Eleve", on_delete=models.CASCADE, null=True)
     autoevaluation_possible = models.IntegerField(choices=facilite_reconnaissance, default=2)
-    phase = models.IntegerField(choices=facilite_reconnaissance, default=0)
+    phase = models.IntegerField(choices=phases, default=0)  # Utilisation de la liste 'phases' pour les choix
     facilitee_apprentissage = models.FloatField(default=2.5)
-    intervalle = models.CharField(max_length=4, default = 0, null=False, blank=False)
+    intervalle = models.CharField(max_length=4, default=0, null=False, blank=False)
     date_de_revue = models.DateTimeField()
 
     def __str__(self):
         return f"DonnesRevision {self.id}"
 
-    def maj_prochaine_revue(self):
+    def maj_prochaine_revue(self, autoevaluation):
         '''
         fonction qui peut changer la date de revue, l'intervalle, la facilitee, la phase 
         EN FONCTION de l'utilisateur
