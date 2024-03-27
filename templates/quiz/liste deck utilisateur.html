@@ -1,11 +1,22 @@
 {% extends 'baseavecnavbar.html' %}
+{% block style %}
+.carte{
+  border-style:solid;
+  display: flex;
+  margin: 20px;
+  justify-content:space-between;
+}
+{% endblock %}
 {% block content %}
 <ul>
 {% for carte in cartes %}
-  <a href ="{% url 'reviser-carte' carte.id %}"><q> {{carte.devant}} </q>
-  <q> {{carte.carte.dos}} </q> </a>
-  date_de_revue
-  <br>
+<div class="carte">
+  <a href ="{% url 'reviser-carte' carte.id %}">
+    <p>{{carte.carte.devant | truncatechars:255 }} {{carte.carte.dos | truncatechars:255}}</p>
+  </a>
+  <p>{{carte.date_de_revue}}</p>
+  <button>Éditer cette carte</button>
+</div>
 {% endfor %}
 <ul>
 {% endblock content %}

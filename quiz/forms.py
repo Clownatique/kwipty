@@ -8,7 +8,7 @@ class FlashCarteForm(forms.ModelForm):
     '''
     permets tout bonnement la création d'une flashcarte
     '''
-    cours = forms.ModelChoiceField(queryset = Cours.objects.all(), label=Cours)
+    cours = forms.ModelChoiceField(queryset = Cours.objects.all(), label='Cours')
     class Meta:
         model = FlashCarte
         fields = '__all__'
@@ -31,8 +31,14 @@ class MajProchaineRevue(forms.Form):
     '''
     enregistre la nouvelle revue d'une carte pour l'utilisateur
     '''
-
-    autoevaluation_possible = forms.ChoiceField(choices=MetaDonneesCarte.facilite_reconnaissance)
+    autoevaluation_possible = forms.ChoiceField(choices=MetaDonneesCarte.facilite_reconnaissance, widget=forms.RadioSelect)
 
     def __init__(self, *args, **kwargs):
+        self.instance = kwargs.pop('instance', None)
         super(MajProchaineRevue, self).__init__(*args, **kwargs)
+
+    def save(self):
+        if self.instance:
+            autoevaluation = self.cleaned_data.get('autoevaluation_possible')
+            self.instance.maj_prochaine_revue(autoevaluation)
+            self.instance.save()

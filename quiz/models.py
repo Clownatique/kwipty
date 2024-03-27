@@ -3,6 +3,7 @@ from django.core.files.images import ImageFile
 from django.db import models
 from django.utils import timezone
 from datetime import timedelta
+import datetime
 
 class FlashCarte(models.Model):
     '''
@@ -92,7 +93,7 @@ class MetaDonneesCarte(models.Model):
 
     carte = models.ForeignKey(FlashCarte, on_delete=models.CASCADE)
     eleve = models.ForeignKey("compte.Eleve", on_delete=models.CASCADE, null=True)
-    autoevaluation_possible = models.IntegerField(choices=facilite_reconnaissance, default=2)
+    autoevaluation_possible = models.CharField(choices=facilite_reconnaissance, default=2, max_length=15)
     phase = models.IntegerField(choices=phases, default=0)  # Utilisation de la liste 'phases' pour les choix
     facilitee_apprentissage = models.FloatField(default=2.5)
     intervalle = models.CharField(max_length=4, default=0, null=False, blank=False)
@@ -101,9 +102,29 @@ class MetaDonneesCarte(models.Model):
     def __str__(self):
         return f"DonnesRevision {self.id}"
 
-    def maj_prochaine_revue(self, autoevaluation):
+    def maj_prochaine_revue(self, performance):
         '''
         fonction qui peut changer la date de revue, l'intervalle, la facilitee, la phase 
         EN FONCTION de l'utilisateur
         '''
-        pass
+        easiness_factor = self.facilitee_apprentissage
+        correct_response_interval = int(self.intervalle)
+
+        # Calcul du nouvel intervalle de révision
+        if performance == 0:
+            correct_response_interval = 1
+            easiness_factor = max(1.3, easiness_factor - 0.2)
+        elif performance == 1:
+            correct_response_interval = 1
+        elif performance == 2:
+            correct_response_interval = max(1, round(correct_response_interval * easiness_factor))
+        elif performance == 3:
+            correct_response_interval = max(1, round(correct_response_interval * easiness_factor * 2))
+
+        # Mise à jour des champs de modèle
+        self.intervalle = str(correct_response_interval)
+        self.facilitee_apprentissage = easiness_factor
+        self.date_de_revue = datetime.datetime.now() + datetime.timedelta(days=correct_response_interval)
+
+        # Sauvegarde de l'instance
+        self.save()

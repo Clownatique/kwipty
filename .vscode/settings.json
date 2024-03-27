@@ -4,7 +4,7 @@
         "README.md": true,
         "Pipfile": true,
         "manage.py": true,
-        "djangoenv": true,
+        "djangoenv": false,
         "quiz/tests.py": true,
         "quiz/apps.py": true,
         "quiz/admin.py": true,
