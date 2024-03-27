@@ -46,7 +46,7 @@ def menu_principal(request):
             'deck':deck
         }
 
-        return render(request, 'compte/dashboard.html', context)
+        return render(request, 'compte/menu.html', context)
     else:
         return render(request, 'pasconnecte.html')
 

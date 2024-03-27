@@ -1,66 +1,153 @@
-{% extends 'index.html' %}
+{% extends 'baseavecnavbar.html' %}
 {% block title %}Résumé{% endblock %}
 {% load static %}
-{% block css %}{% static '/compte/dashboard.css' %}{% endblock css %}
+{% block style %}
+menu{ 
+    display: flex;
+    max-height: 95vh;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 20vw;
+}
+
+.liste-matiere{
+    overflow-y: auto; 
+}
+
+.categorie{
+    max-height: 25vh;
+    overflow-y: auto;
+    scroll-behavior: auto;
+}
+
+.options-fixes{
+    display: flex;
+    justify-content: space-evenly;
+}
+.categorie{
+    border:#9f6500 solid 1px;
+}
+.bloc_cours{
+    margin: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-evenly;
+    
+    }
+.bloc_cours{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 15vw;
+    height:6vh;
+    border-style: solid;
+    padding-left: 0;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 10px 10px 5px lightblue;
+}
+
+.intitule{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 3%;
+    font-size: 25px;
+
+}
+
+.contenu{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.info{
+    display: flex;
+    max-height: 25vh;
+    height:25vh;
+    width: 60vw;
+    border-style: solid;
+    background-color: gainsboro;
+    border-color: #b3b3b3;
+    border-radius: 15px;
+}
+.cours{
+    flex-direction: row;
+    justify-content: space-between;
+}
+.stats{
+    display: flex;
+    align-self: flex-end;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+    margin-right: 85px;
+}
+.cartes{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;  
+}
+.cartes .progression{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.progression a{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    scale: 2;
+}
+
+.progression a:hover{
+    scale: 3;
+    rotate: 2deg;
+    column-rule-color: #9f6500;
+}
+.info_revision{
+    display: flex;
+    justify-content: space-around;
+    margin: 0px;
+    list-style: none;
+}
+.liste_cours{
+    display: flex;
+    align-self: flex-end;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+}
+.reviser{
+    display: flex;
+    align-items: center;
+}
+.exercices{
+    display: flex;
+    column-gap: 5%;
+    overflow: hidden;
+    padding-left: 0;
+    overflow-x: scroll;
+}
+.exercices p{
+    width: 40%;
+}
+.exo{
+    width: max-content;
+}{% endblock style %}
 {% block content %}
-<menu>
-    <div class="liste_categorie">
-    {% for categorie in liste_matieres_par_categorie %}
-    <div class="categorie">
-        <a onclick="afficherMatieres('{{ categorie.0.categorie_enseignement }}')">
-        <b>{{ categorie.0.categorie_enseignement }}</b>
-        </a>
-        <div id="{{ categorie.0.categorie_enseignement }}_bloc" class="liste-matiere" style="display: none;">
-        {% for matiere in categorie %}
-            <li class="bloc_cours">
-            <a href="{% url 'affichermatieredetail' matiere_nom=matiere.nom|slugify matiere_id=matiere.id %}"><b class="intitule">{{ matiere.nom }}</b></a>
-            </li>
-        {% endfor %}
-        </div>
-    </div>
-    {% endfor %}
-    </div>
-    <div class="options-fixes additional-options">
-        <img src="info.png">
-        <div>
-            <p> Bonjour, {{request.user.prenom}}</p>
-            <a href="{% url 'logout' %}"><p> Se déconnecter </p></a>
-        </div>
-        <p> Réglage </p>
-    </div>
-</menu>
 <div class="contenu">
     <div class="info cours">
         <div class="intitule">
-            <h1> Tableau de bord </h1>
+            <h1>Vue d'ensemble</h1>
         </div>
         <div class="stats">
-            <p>Nombre de cartes:  {{cartes|length}}</p>
-            <a><p>Documents associés</p></a>
-            <p>Mis en ligne le : {{ cours.date|default_if_none:"non spécifié"}} </p>
-            <p>Difficulté : {{cours.difficulte|default_if_none:"non calculé"}}</p>
+            <p>Nombre de cartes:  {{deck|length}}</p>
         </div>
     </div>
     <div class="info cartes">
-        {{deck}}
-        <div class="progression">
-            <a><img src="../media/icones/icone_carte.png.png" sizes="3"></a>
-            <progress max="{{cartes|length}}" value="{{nombre_cartes_apprises}}"></progress>
-        </div>
-        <a href="{% url 'voir-cartes-perso' %}">voir les cartes</a>
-        <div class="info_revision">
-            <li class="liste_cours">
-                {% for tag, count in tag_counts.items %}
-                <a>
-                    {% if count == 1 %}
-                        {{ count }} {{ tag }}
-                    {% else %}
-                        {{ count }} {{ tag}}{{ tag | pluralize:'s' }}
-                    {% endif %}
-                </a>
-                {% endfor %}
-            </li>
-        </div>
+        <button href="{% url 'voir-deck' %}">voir les cartes</button>
         {% if cartes is not None %}
         <a class="reviser" href="{% url 'reviser_cartes' revision_instance.id %}">
             <button>
@@ -79,7 +166,7 @@
                     Créer des cartes
                 </button>
             </a>
-            <a href='{% url 'voir-cartes' %}'>
+            <a href='{% url 'voir-cartes-disponibles' %}'>
                 <button>
                     Rechercher des cartes parmis celle déjà existente
                 </button>
@@ -87,21 +174,8 @@
         {% endif %}
     </div>
     <div class="info">
-        <a href='{% url 'creer-cours' %}'>creer cours</a>
-        <a href='{% url 'liste-cours' %}'>liste cours</a>
+        <button href='{% url 'creer-cours' %}'>creer cours</button>
+        <button href='{% url 'liste-cours' %}'>liste cours</button>
     </div>
 </div>
-
-<script>
-function afficherMatieres(categorieId) {
-  var blocCoursElement = document.getElementById(categorieId + '_bloc');
-  
-  // Affiche ou masque le bloc_cours
-  if (blocCoursElement.style.display === 'none') {
-    blocCoursElement.style.display = 'block';
-  } else {
-    blocCoursElement.style.display = 'none';
-  }
-}
-</script>
 {% endblock %}

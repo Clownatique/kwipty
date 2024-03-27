@@ -5,24 +5,36 @@
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Carte disponibles</title>
-            <style>
-                body{
-                    display:flex;
+            <style>@font-face {
+                font-family: Nunito;
+                src: url(Nunito-VariableFont_wght.ttf);
                 }
+            body{
+                font-family: Nunito;
+                display: flex;
+                width: 100vw;
+                height: 100vh;
+                margin:0;
+            }
                 .navbar{
                     height: 100vh;
                     background-color: aliceblue;
                     display: flex;
-                    flex-direction: column;
+                    flex-direction: row;
                     justify-content: space-between;
                     padding:0;
                 }
                 .nav-buttons {
+                    text-decoration:none;
                     list-style-type: none;
                     margin: 0;
                     padding: 0;
                     width: 200px;
                     background-color: #f1f1f1;
+                  }
+                  .nav-buttons :link{
+
+                    text-decoration:none;
                   }
                   .nav-buttons :hover{
                     background-color: red;
@@ -71,19 +83,20 @@
             <button id="toggleNav">Menu</button>
             <nav id="navbar">
                 <ul>
-                    <li><a href="#">Accueil</a></li>
+                    <li><a href="{% url 'accueil'%}">Accueil</a></li>
                     <li><a href="#">Cours</a></li>
                     <li><a href="#">Exercices</a></li>
                     <li><a href="#">Quizs</a></li>
                     <li><a href="#">À propos</a></li>
                 </ul>
-                {% if utilisateur.is_authenticated %}
-                Bonjour {{utilisateur.prenom}} ! 
-                <a href={% url 'menu' %}>Travail</a>
-                <a href={% url 'reviser-carte' 1 %}> Réviser </a> 
-                {% else %}
-                <a href={% url 'connexion' %}>Se connecter</a>
-                {%endif%}
+                <div class='connect'>
+                    {% if utilisateur.is_authenticated %}
+                    <p>Bonjour {{utilisateur.prenom}} !</p>
+                    <a href={% url 'menu' %}>Accèder à Synaptiko</a> 
+                    {% else %}
+                    <a href={% url 'connexion' %}>Se connecter</a>
+                    {%endif%}
+                </div>
                 </div>
             </nav>
         </header>

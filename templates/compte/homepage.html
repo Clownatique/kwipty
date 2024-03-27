@@ -32,13 +32,6 @@ footer {
 }
 {% endblock style %}
 {% block content %}
-{% if utilisateur.is_authenticated %}
-Bonjour {{utilisateur.prenom}} ! 
-<a href={% url 'menu' %}>Travail</a>
-<a href={% url 'reviser-carte' 1 %}> Réviser </a> 
-{% else %}
-<a href={% url 'connexion' %}>Se connecter</a>
-{%endif%}
     <header>
         <h1>Synaptiko</h1>
         <p>Centralisez vos cours et restez organisé dans vos révisions</p>
@@ -47,14 +40,13 @@ Bonjour {{utilisateur.prenom}} !
         <div class="feature">
             <h2>Centralisation</h2>
             <p>Regroupez tous vos cours, exercices et quizs en un seul endroit</p>
+            <p>Marre des multiples ENT avec des interfaces surchargés et leur authentification pénible?<br>Avec <strong>Synaptiko</strong>, oubliez tout ça.</p>
         </div>
         <div class="feature">
-            <h2>Organisation</h2>
-            <p>Organisez vos révisions avec des catégories et des tags personnalisés</p>
-        </div>
-        <div class="feature">
-            <h2>Interaction</h2>
-            <p>Interagissez avec vos cours en ajoutant des notes et des commentaires</p>
+            <h2>Flascharte</h2>
+            <p>Vous en avez assez de re-réviser certaines formules pendant 3h le dimanche soir ?</p>
+            <strong>Vous êtes au bon endroit.</strong>
+            <a style='font-color:grey; a:link {text-decor: none;}'> En savoir plus</a>
         </div>
     </section>
     <footer>
