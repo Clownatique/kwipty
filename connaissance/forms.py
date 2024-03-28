@@ -28,7 +28,6 @@ class CoursForm(forms.ModelForm):
                 "max_lenght": ("Choisissez un titre de moins de 100 caractères."),
             }
         }
-
     disable_client_side_validation = True
 
     def __init__(self, *args, **kwargs):
