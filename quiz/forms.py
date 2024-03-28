@@ -12,17 +12,31 @@ class FlashCarteForm(forms.ModelForm):
     class Meta:
         model = FlashCarte
         fields = '__all__'
-#        labels = {
-#            "dos": ("Writer"),
-#        }
-#        help_texts = {
-#            "dos": ("Some useful help text."),
-#        }
-#        error_messages = {
-#            "dos": {
-#                "max_length": ("La question ne doit pas excèder tant de charactère."),
-#            },
-#        }
+class Meta:
+        model = FlashCarte
+        fields = '__all__'
+        labels = {
+            ("dos","Remplir le dos de la carte"),
+            ("type_de_note","Entrez le type de note"),
+            ("devant","Remplir le devant de la carte"),
+            ("image_devant","Ajoutez une image au devant"),
+            ("image_dos","Ajoutez une image au dos"),
+            ("publique","Enregistrer votre carte publiquement")
+        }
+        help_texts = {
+            ("dos","Écrivez la réponse que vous cherchez à mémoriser"),
+            ("type_de_note","Entrez le type de votre carte pour mieux la répertorier"),
+            ("devant","Écrivez le mot ou la phrase qui va vous permettre de mémoriser la réponse"),
+            ("image_devant","Ajoutez une image pour mémoriser votre réponse"),
+            ("image_dos","Ajoutez une image que vous voulez mémoriser"),
+            ("publique","Partagez votre carte avec d'autres utilisateurs si vous le souhaitez")
+        }
+        error_messages = {
+            ("dos","100 caractères maximum"),
+            ("type_de_note","20 caractères maximum"),
+            ("devant","100 caractères maximum")
+        }
+
 
     def __init__(self, *args, **kwargs):
         super(FlashCarteForm, self).__init__(*args, **kwargs)

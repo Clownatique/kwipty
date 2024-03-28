@@ -1,9 +1,13 @@
+<html>
+<head>
+<link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
+
+
+
 {% extends "baseavecnavbar.html" %}
 {% block style %}
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+    font-family: 'Nunito'; font-size: 18px;
 }
 
 header {
@@ -11,12 +15,15 @@ header {
     color: white;
     text-align: center;
     padding: 80px 0;
+    border: 2px solid black;
 }
 
 .features {
     display: flex;
     justify-content: space-around;
     padding: 50px 0;
+    border: 2px solid black;
+    border-radius: 8px;
 }
 
 .feature {
@@ -54,3 +61,5 @@ footer {
     </footer>
     <script src="script.js"></script>
 {% endblock content %}
+</head>
+</html>
