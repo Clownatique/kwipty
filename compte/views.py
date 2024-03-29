@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.template import loader
-from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
 from .forms import CreationEleveForms, LoginForm
@@ -15,7 +14,6 @@ from django.template import loader
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
-from .forms import CreationEleveForms, LoginForm
 from django.views.generic.edit import CreateView
 from django.contrib.auth.views import LoginView
 from django.views.generic import View
@@ -35,7 +33,7 @@ def page_accueil(request):
 class CustomLoginView(LoginView):
     template_name = 'compte/connexion.html'
     form_class = LoginForm
-    success_url = reverse_lazy("menu")
+    success_url = reverse_lazy("accueil")
 
 class SignUpView(generic.CreateView):
     form_class = CreationEleveForms
@@ -89,9 +87,8 @@ def page_accueil(request):
     }
     return render(request, 'compte/homepage.html', context)
 
-#class CustomLoginView(LoginView):
-#    template_name = 'compte/connexion.html'  # specify your login template
-#    form_class = LoginForm
+class CustomLoginView(LoginView):
+    template_name = 'compte/connexion.html'  # specify your login template
 
 class SignUpView(generic.CreateView):
     form_class = CreationEleveForms
@@ -108,15 +105,12 @@ def menu_principal(request):
     (nombre de cartes, temps de révision estimé selon son temps passé sur une carte)
     https://www.justinmind.com/ui-design/dashboard-design-best-practices-ux
     '''
-    if request.user.is_authenticated:
-        deck = DeckUtilisateur.objects.get(pk = request.user.id)
-        context = {
-            'deck':deck
-        }
+    deck = DeckUtilisateur.objects.get(pk = request.user.id)
+    context = {
+        'deck':deck
+    }
 
-        return render(request, 'compte/menu.html', context)
-    else:
-        return render(request, 'pasconnecte.html')
+    return render(request, 'compte/menu.html', context)
 
 def menu_tuto(request):
     '''

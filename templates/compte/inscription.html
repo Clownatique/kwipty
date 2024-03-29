@@ -1,9 +1,9 @@
-{% extends 'base.html' %}
+{% extends 'baseavecnavbar.html' %}
 {% load static %}
 {% block css %}{% static 'compte/inscription.css'%}{% endblock css %}
 {% block content %}
   <form method="post">
-    <h2>S'inscrire sur en5minutes</h2>
+    <h2>S'inscrire sur Kwipty</h2>
     {% csrf_token %}
     {% for field in form %}
         <div class="fieldWrapper">

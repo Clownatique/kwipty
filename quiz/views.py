@@ -32,7 +32,7 @@ def reviser_carte(request, metadonnes_carte_id):
     ''' modifier cette fonction pour qu'elle puisse prendre en argument DES cartes 
         (sous forme de queryset) OU simplement une carte (cas ou l'utilisateur veut une preview d'une carte)
     '''
-    metadonnescarte = FlashCarte.objects.get(id=metadonnes_carte_id)
+    metadonnescarte = MetaDonneesCarte.objects.get(id=metadonnes_carte_id)
     if request.method == "POST":
         forme = MajProchaineRevue(request.POST)
         if forme.is_valid():

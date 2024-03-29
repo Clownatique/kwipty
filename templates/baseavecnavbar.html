@@ -96,6 +96,7 @@
                     {% if utilisateur.is_authenticated %}
                     <p>Bonjour {{utilisateur.prenom}} !</p>
                     <a href={% url 'menu' %}>Accèder à Synaptiko</a> 
+                    <a href={% url 'logout' %}>Se déconnecter</a>
                     {% else %}
                     <a href={% url 'connexion' %}>Se connecter</a>
                     {%endif%}

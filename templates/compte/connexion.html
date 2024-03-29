@@ -4,11 +4,11 @@
 {% block css %}{% static 'compte/connexion.css' %}{% endblock css %}
 {% block content %}
   <div class="login-container">
-      <h2>Login</h2>
-      <form method="post" action="{% url 'menu' %}">
+      <h2>Connexion</h2>
+      <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Réviser !</button>
+        <button type="submit" >Réviser !</button>
       </form>
     
 
