@@ -1,3 +1,5 @@
+SUR LINUX
+
 [] Vérifier d'avoir installé l'extension "Simple Hide Files"
 [] Ouvrir une nouvelle fenêtre (fichier>nouvelle fenetre)
 [] Recloner le repository "revision en 5 minutes"
@@ -5,8 +7,6 @@
 [] "source djangoenv/bin/activate" pour lancer l'environnement python
 [] "python3 manage.py runserver" pour utiliser le serveur
 
-ensuite, envoyez moi les fichiers que vous avez modifié (ou cas ou github fais nptk)
-sinon, faites source(icone d'arborescence sur le côté)>commit>résumez vos modifications/avancés.
 
 LOGIN TESTPROFILES:
 - usertest
