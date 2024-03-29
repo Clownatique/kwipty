@@ -37,8 +37,35 @@ class FlashCarteForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(FlashCarteForm, self).__init__(*args, **kwargs)
 
-class FlashCarteFromFile(forms.Form):
+class FlashCarteFromCSV(forms.Form):
     fichier = forms.FileField()
+
+    def clean_fichier(self):
+        fichier = self.cleaned_data['fichier']
+        if not fichier.name.endswith('.csv'):
+            raise forms.ValidationError("Le fichier doit être au format CSV.")
+        return fichier
+
+    def import_flashcartes(self):
+        fichier = self.cleaned_data['fichier']
+        flashcartes = []
+
+        try:
+            decoded_file = fichier.read().decode('utf-8').splitlines()
+            reader = csv.DictReader(decoded_file)
+            for row in reader:
+                flashcarte_data = {
+                    'devant': row['question'],
+                    'dos': row['réponse']
+                }
+                form = FlashCarteForm(flashcarte_data)
+                if form.is_valid():
+                    flashcartes.append(form.save())
+                else:
+                    raise forms.ValidationError("Erreur lors de la validation du formulaire.")
+        except Exception as e:
+            raise forms.ValidationError("Une erreur s'est produite lors de l'importation du fichier CSV.")
+
 
 class MajProchaineRevue(forms.Form):
     '''
