@@ -34,16 +34,7 @@ class FlashCarte(models.Model):
     id = models.AutoField(primary_key=True)
     champs_supplementaires = models.TextField(blank=True, null = True)
     publique = models.BooleanField(default=True)
-
-    def save(self, *args, **kwargs):
-        if self.image_devant:
-            self.save_image(self.image_devant, 'image_devant')
-
-        if self.image_dos:
-            self.save_image(self.image_dos, 'image_dos')
-
-        super(FlashCarte, self).save(*args, **kwargs)
-
+    
     def save_image(self, image, attribute_name):
         image_name = f'{attribute_name}_{self.id}_{image.name}'
         self.__dict__[attribute_name] = f'images/{image_name}'

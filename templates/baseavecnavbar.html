@@ -82,7 +82,7 @@
         
     <body>
         <header>
-            <h1>Synaptiko</h1>
+            <h1>Kwipty</h1>
             <button id="toggleNav">Menu</button>
             <nav id="navbar">
                 <ul>
@@ -95,7 +95,7 @@
                 <div class='connect'>
                     {% if utilisateur.is_authenticated %}
                     <p>Bonjour {{utilisateur.prenom}} !</p>
-                    <a href={% url 'menu' %}>Accèder à Synaptiko</a> 
+                    <a href={% url 'menu' %}>Accèder à Kwipty</a> 
                     <a href={% url 'logout' %}>Se déconnecter</a>
                     {% else %}
                     <a href={% url 'connexion' %}>Se connecter</a>

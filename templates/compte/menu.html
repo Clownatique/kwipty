@@ -138,12 +138,16 @@ menu{
 }{% endblock style %}
 {% block content %}
 <div class="contenu">
+    {{deck}}
+    {{tout}}
+
+    {{deck.cartes}}
     <div class="info cours">
         <div class="intitule">
             <h1>Vue d'ensemble</h1>
         </div>
         <div class="stats">
-            <p>Nombre de cartes:  {{deck|length}}</p>
+            <p>Nombre de cartes:  {{deck.cartes}}</p>
         </div>
     </div>
     <div class="info cartes">
@@ -154,27 +158,32 @@ menu{
             </button>
         </a>
         {% else %}
-        <a class="reviser" href="{% url 'reviser-cartes' %}">
-            <button>
-                Revoir toute vos cartes
-            </button>
-        </a>
         <a class="reviser">
-            <a href="{% url 'creer-carte' %}">
+            <a class="reviser" href="{% url 'reviser-cartes' %}">
+                <button>
+                    Revoir toute vos cartes
+                </button>
+            </a>
+            <a class="reviser" href="{% url 'creer-carte' %}">
                 <button>
                     Créer des cartes
                 </button>
             </a>
-            <a href='{% url 'voir-cartes-disponibles' %}'>
+            <a class="reviser" href='{% url 'voir-cartes-disponibles' %}'>
                 <button>
                     Rechercher des cartes parmis celle déjà existente
                 </button>
              </a>
+             <a class="reviser" href='{% url 'voir-deck' %}'>
+                <button>
+                    Voir deck
+                </button>
+             </a>
         {% endif %}
     </div>
-    <div class="info">
-        <a href='{% url 'creer-cours' %}'><button>creer cours</button></a>
-        <a href='{% url 'liste-cours' %}'><button>liste cours</button></a>
+    <div class="info reviser">
+        <a href='{% url 'creer-cours' %}' class='reviser'><button>creer cours</button></a>
+        <a href='{% url 'liste-cours' %}' class='reviser'><button>liste cours</button></a>
     </div>
 </div>
 {% endblock %}

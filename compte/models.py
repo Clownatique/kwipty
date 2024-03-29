@@ -14,18 +14,18 @@ class Eleve(AbstractUser):
     nom = models.CharField(max_length=50)
     prenom = models.CharField(max_length=50)
     email = models.EmailField(max_length=254)
-    #deck = models.OneToOneField(DeckUtilisateur, on_delete=models.CASCADE, default=create_deck_instance())
     
     def __str__(self):
         return self.username
 
     def save(self,*args, **kwargs):
+        deck = DeckUtilisateur.objects.create(eleve=self)
+        deck.save()
         super().save(*args, **kwargs)
-        DeckUtilisateur.objects.create(eleve=self)
 
 class DeckUtilisateur(models.Model):
     eleve = models.ForeignKey(Eleve, on_delete=models.CASCADE)
-    cartes = models.ForeignKey(FlashCarte, on_delete=models.CASCADE, null=True)
+    cartes = models.ManyToManyField("quiz.MetaDonneesCarte")
     
     class Meta:
         verbose_name = ("Deck de l'utilisateur")

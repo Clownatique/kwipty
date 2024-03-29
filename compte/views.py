@@ -105,9 +105,11 @@ def menu_principal(request):
     (nombre de cartes, temps de révision estimé selon son temps passé sur une carte)
     https://www.justinmind.com/ui-design/dashboard-design-best-practices-ux
     '''
-    deck = DeckUtilisateur.objects.get(pk = request.user.id)
+    deck = DeckUtilisateur.objects.get(eleve = request.user)
+    toutlesdeck= DeckUtilisateur.objects.all()
     context = {
-        'deck':deck
+        'deck':deck,
+        'tout':toutlesdeck
     }
 
     return render(request, 'compte/menu.html', context)

@@ -20,7 +20,7 @@ def voir_cartes(request):
 
 def voir_deck(request):
     eleve = Eleve.objects.get(pk=request.user.id)
-    deck = DeckUtilisateur.objects.get(pk = request.user.id)
+    deck = DeckUtilisateur.objects.get(eleve=eleve)
     cartes = MetaDonneesCarte.objects.filter(eleve=eleve)
     context = {
         'deck':deck.cartes,
@@ -62,6 +62,8 @@ def ajouter_carte(request, carteid):
                                                 date_de_revue=date.today(),
                                                 phase=0)
     temp_meta.save()
+    deck = DeckUtilisateur.objects.get(eleve=eleve)
+    deck.cartes.add(temp_meta)
     return redirect('voir-cartes-disponibles')
 
 def creer_des_cartes(request):
