@@ -12,9 +12,6 @@ class FlashCarteForm(forms.ModelForm):
     class Meta:
         model = FlashCarte
         fields = '__all__'
-class Meta:
-        model = FlashCarte
-        fields = '__all__'
         labels = {
             ("dos","Remplir le dos de la carte"),
             ("type_de_note","Entrez le type de note"),
@@ -37,9 +34,11 @@ class Meta:
             ("devant","100 caractères maximum")
         }
 
-
     def __init__(self, *args, **kwargs):
         super(FlashCarteForm, self).__init__(*args, **kwargs)
+
+class FlashCarteFromFile(forms.Form):
+    fichier = forms.FileField()
 
 class MajProchaineRevue(forms.Form):
     '''

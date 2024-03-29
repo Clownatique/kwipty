@@ -147,7 +147,6 @@ menu{
         </div>
     </div>
     <div class="info cartes">
-        <button href="{% url 'voir-deck' %}">voir les cartes</button>
         {% if cartes is not None %}
         <a class="reviser" href="{% url 'reviser_cartes' revision_instance.id %}">
             <button>
@@ -174,8 +173,8 @@ menu{
         {% endif %}
     </div>
     <div class="info">
-        <button href='{% url 'creer-cours' %}'>creer cours</button>
-        <button href='{% url 'liste-cours' %}'>liste cours</button>
+        <a href='{% url 'creer-cours' %}'><button>creer cours</button></a>
+        <a href='{% url 'liste-cours' %}'><button>liste cours</button></a>
     </div>
 </div>
 {% endblock %}

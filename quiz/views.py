@@ -29,14 +29,20 @@ def voir_deck(request):
     return render(request, 'quiz/liste deck utilisateur.html', context)
 
 def reviser_carte(request, flashcarteid):
+
+    ''' modifier cette fonction pour qu'elle puisse prendre en argument DES cartes 
+        (sous forme de queryset) OU simplement une carte (cas ou l'utilisateur veut une preview d'une carte)
+    '''
     flashcarte = FlashCarte.objects.get(id = flashcarteid)
     metadonnescarte = MetaDonneesCarte.objects.get(carte=flashcarte, eleve=request.user)
-    if request.method == "POST":
-        forme = MajProchaineRevue(request.POST)
-        if forme.is_valid():
-            autoevaluation_possible = forme.cleaned_data['autoevaluation_possible']
-            metadonnescarte.maj_prochaine_revue(autoevaluation_possible)
-            return redirect('menu')
+    if metadonnescartes.exists():  # Check if any matching metadata exists
+        metadonnescarte = metadonnescartes.first()  # Or you can handle multiple metadonnescartes differently
+        if request.method == "POST":
+            forme = MajProchaineRevue(request.POST)
+            if forme.is_valid():
+                autoevaluation_possible = forme.cleaned_data['autoevaluation_possible']
+                metadonnescarte.maj_prochaine_revue(autoevaluation_possible)
+                return redirect(request.META.get('HTTP_REFERER', 'menu'))
     context = {
         'carte':flashcarte,
         'metadonnescarte':metadonnescarte,
@@ -47,9 +53,11 @@ def reviser_carte(request, flashcarteid):
 
 def reviser_cartes_ajourdhui(request):
     pqt_revision = PaquetCartes.objects.create()
-    cartes_a_reviser = MetaDonneesCarte.objects.filter(date_de_revue=date.today())
-    for carte in cartes_a_reviser:
-        pqt_revision.cartes = carte.carte
+    cartes_a_reviser = MetaDonneesCarte.objects.filter(date_de_revue__lte = date.today())
+    for meta_carte in cartes_a_reviser:
+        carte_id = meta_carte.carte.id
+        reviser_carte(request, carte_id)
+
 
 
 def ajouter_carte(request, carteid):
