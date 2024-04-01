@@ -82,3 +82,12 @@ def creer_une_carte(request):
             return redirect('voir-cartes-disponibles')
     return render(request, 'quiz/creation_flashcarte.html',{'forme': carteforme})  
 
+def supprimer_carte(request, metadonnesid):
+    deck = DeckUtilisateur.objects.get(eleve = request.user.id)
+    metadonnescarte = MetaDonneesCarte.objects.get(id = metadonnesid)
+    deck.cartes.remove(metadonnescarte)
+    deck.save()
+    return redirect('voir-deck')
+
+def modifier_carte(request, metadonnesid):
+    pass

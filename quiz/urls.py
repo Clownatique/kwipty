@@ -10,6 +10,6 @@ urlpatterns = [
     path("cartes/liste/ajout/<int:carteid>", views.ajouter_carte, name="ajout-carte"),
     path("cartes/deck/", views.voir_deck, name="voir-deck"),
     path("cartes/deck/<int:carteid>/modifier/", views.ajouter_carte, name="ajout-carte"),
-    path("cartes/deck/<int:carteid>/supprimer", views.ajouter_carte, name="supprimer-carte"),
+    path("cartes/deck/<int:metadonnesid>/supprimer/", views.supprimer_carte, name="supprimer-carte"),
     path("cartes/deck/<int:carteid>/parametre", views.ajouter_carte, name="parametre-carte"),
 ]

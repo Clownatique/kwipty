@@ -16,6 +16,7 @@
   </a>
   <p>{{carte.date_de_revue}}</p>
   <button>Éditer cette carte</button>
+  <a href={% url 'supprimer-carte' carte.id %}> <button>Supprimer cette carte</button></a>
 </div>
 {% endfor %}
 <ul>
